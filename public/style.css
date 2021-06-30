@@ -40,10 +40,13 @@ input{
     border: none;
 }
 
+.signupTitle{
+    margin-bottom: 1rem;
+}
+
 button{
     margin-top: 1rem;
     padding: 10px;
     border-radius: 5px;
     width: 50%;
-    text-align: center;
 }
