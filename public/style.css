@@ -8,6 +8,7 @@ body{
     margin: 0;
     height: 100vh;
 }
+
 form {
     padding: 30px;
     max-width: 400px;
@@ -23,18 +24,22 @@ form {
     align-items: center;
 }
 
+/* class for fieldset from sign-up page */
+
 .eh{
     display: flex;
     flex-direction: column; 
     gap: 1rem;
     
 }
+
 input{
     padding: 10px;
     border-radius: 5px;
     outline:none;
     border: none;
 }
+
 button{
     margin-top: 1rem;
     padding: 10px;
