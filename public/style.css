@@ -14,7 +14,7 @@ form {
     max-width: 400px;
     width: 350px;
     min-width: 300px;
-    height: 500px;
+    min-height: 500px;
     display: flex;
     flex-direction: column;
     background-color:#333333;
