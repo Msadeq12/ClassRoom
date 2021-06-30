@@ -20,12 +20,14 @@ form {
     gap: 10px;
     border-radius: 1rem;
     justify-content: space-between;
+    align-items: center;
 }
 
 .eh{
     display: flex;
     flex-direction: column; 
     gap: 1rem;
+    
 }
 input{
     padding: 10px;
@@ -34,6 +36,9 @@ input{
     border: none;
 }
 button{
+    margin-top: 1rem;
     padding: 10px;
     border-radius: 5px;
+    width: 50%;
+    text-align: center;
 }
