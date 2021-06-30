@@ -21,6 +21,16 @@ Website.get("/", (req,res) => {
     res.render("sign-up");
 });
 
+Website.get('/login', (req, res) =>{
+    res.render('login')
+});
+
+//handing post requests
+
+Website.post('/', (req, res) => {
+    console.log(req.body);
+});
+
 Website.listen(1550, () => {
     console.log("Listening at 1550...");
 })
