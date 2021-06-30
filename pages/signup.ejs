@@ -4,7 +4,7 @@
 
 <!-- Zuhair was here-->
     <body>
-        <form method="POST">
+        <form method="POST" action = "/signup">
             <fielset class="eh">
 
                 <legend class = "signupTitle">Sign Up</legend>
@@ -16,16 +16,57 @@
                 <input type = "text" name = "lastname">
 
                 <label for = "Email">Email: </label>
-                <input type = "email" name = "Email">
+                <input type = "text" name = "Email">
                 
                 <label for = "Password">Password: </label>
-                <input type = "password" name = "Password">
+                <input type = "password" name = "Password" id = "password">
 
                 <label for = "passwordConfirm">Confirm Password: </label>
-                <input type = "password" name = "passwordConfirm">                
+                <input type = "password" name = "passwordConfirm" id = "password2">    
+                            
             </fielset>
 
-            <button type = "submit">Submit</button>
+            <button type = "submit" name = "submit" id = "submit">Submit</button>
+            
+            <p id = "error"></p>
+            
+            <script>
+                var password = document.getElementById("password").innerHTML;
+                var password2 = document.getElementById("passwordConfirm").innerHTML;
+                var submit = document.getElementById("submit");
+
+                if (password !== password2)
+                {
+                    document.getElementById("error").innerHTML = "Passwords do not match !";
+                    submit.disabled = true;
+                }
+                
+                
+
+                else
+                {
+                    submit.disabled = false;
+
+                }
+            </script>
+                
+            <% if(typeof errors !== 'undefined'){
+                for(var error of errors){
+                %>
+                    <p class = "error"><%= error.msg %></p>
+                <%
+                }
+            }
+            %>
+
+            
+
+            
+                        
+
+
+
+            
 
 
         </form>
