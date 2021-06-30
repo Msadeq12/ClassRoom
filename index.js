@@ -3,7 +3,7 @@ const Mongo = require("mongoose");
 const crypto = require("crypto");
 const bodyParser = require("body-parser");
 const { urlencoded } = require("body-parser");
-
+const {check, validationResult} = require("express-validator");
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
@@ -18,7 +18,7 @@ Mongo.connect("mongodb://localhost:27017/ClassRoom",
 );
 
 Website.get("/", (req,res) => {
-    res.render("home");
+    res.render("signup");
 });
 
 Website.get('/login', (req, res) =>{
@@ -26,13 +26,36 @@ Website.get('/login', (req, res) =>{
 });
 
 Website.get('/signup', (req, res) => {
-    res.render('sign-up');
+    res.render('signup');
 });
-//handing post requests
-Website.post('/signup', (req, res) => {
-    console.log(req.body);
-    //Check if credentials are correct and then redirect to home
-    res.redirect('/');
+
+
+//handing post requests from the signup page.
+Website.post('/signup', [
+    check("firstname", "must have a first name !").not().isEmpty(),
+    check("lastname", "must have a last name !").not().isEmpty(),
+    check("Email", "must have an email !").isEmail(),
+    check("Password", "must have a password").not().isEmpty()
+], (req,res) => {
+    var errors = validationResult(req);
+    var email = req.body.Email;
+    var password = req.body.Password;
+    var confirmPassword = req.body.confirmPassword;
+
+    if (!errors.isEmpty())
+    {
+        res.render("signup", {
+            errors:errors.array()
+        });
+
+        return;
+    }
+
+    else 
+    {
+        res.render("home");
+    }
+      
 });
 
 Website.post('/login', (req, res) => {
