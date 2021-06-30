@@ -7,7 +7,7 @@ const { urlencoded } = require("body-parser");
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
-Website.use(express.static("/tools"));
+Website.use(express.static("public"));
 
 Website.set("views", "pages");
 Website.set("view engine", "ejs");

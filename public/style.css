@@ -1,0 +1,39 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    color:white;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+form {
+    padding: 30px;
+    max-width: 400px;
+    width: 350px;
+    min-width: 300px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color:#333333;
+    gap: 10px;
+    border-radius: 1rem;
+    justify-content: space-between;
+}
+
+.eh{
+    display: flex;
+    flex-direction: column; 
+    gap: 1rem;
+}
+input{
+    padding: 10px;
+    border-radius: 5px;
+    outline:none;
+    border: none;
+}
+button{
+    padding: 10px;
+    border-radius: 5px;
+}
