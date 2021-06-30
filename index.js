@@ -18,7 +18,7 @@ Mongo.connect("mongodb://localhost:27017/ClassRoom",
 );
 
 Website.get("/", (req,res) => {
-    res.render("sign-up");
+    res.render("home");
 });
 
 Website.get('/login', (req, res) =>{
