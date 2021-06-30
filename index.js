@@ -25,12 +25,21 @@ Website.get('/login', (req, res) =>{
     res.render('login')
 });
 
+Website.get('/signup', (req, res) => {
+    res.render('sign-up');
+});
 //handing post requests
-
-Website.post('/', (req, res) => {
+Website.post('/signup', (req, res) => {
     console.log(req.body);
+    //Check if credentials are correct and then redirect to home
+    res.redirect('/');
+});
+
+Website.post('/login', (req, res) => {
+    console.log(req.body);
+    
 });
 
 Website.listen(1550, () => {
     console.log("Listening at 1550...");
-})
+});
