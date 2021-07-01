@@ -89,12 +89,10 @@ Website.post('/signup', [
         newUser.save().then(() =>{
             console.log('new user created');
             res.cookie("SESSION_ID", sessionid, {httpOnly:true});
+            res.redirect("/");
         });
-        res.redirect("/");
     }
-      
-    
-    res.render('signup');
+
 });
 
 
