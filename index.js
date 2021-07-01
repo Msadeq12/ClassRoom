@@ -83,7 +83,7 @@ Website.post('/signup', [
     res.render('signup');
 });
 
-//handing post requests
+//handing post request
 Website.post('/signup', (req, res) => {
     console.log(req.body);
     const name = `${req.body.firstname} ${req.body.lastname}`;
@@ -99,9 +99,10 @@ Website.post('/signup', (req, res) => {
         res.cookie("SESSION_ID", sessionid, {httpOnly:true});
     });
 
-    //Check if credentials are correct and then redirect to home
+    
 });
 
+// creates a session after login attempted
 Website.post('/login', (req, res) => {
     console.log(req.body);
     User.findOne({email: req.body.email}).exec( (err, user) => {
@@ -126,6 +127,7 @@ Website.listen(1550, () => {
     console.log("Listening at 1550...");
 });
 
+//this function generates a random string which is the session id for a partcular user.
 function randomString (){
     return crypto.randomBytes(32).toString('hex');
 }
