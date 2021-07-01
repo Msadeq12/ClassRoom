@@ -79,12 +79,12 @@ Website.post('/signup', [
         const email = req.body.email;
         const salt = randomSalt();
         const password = req.body.password;
-        const hashedandsalted = crypto.createHmac("sha256", salt).update(secretPass).digest("hex");
+        const hashedandsaltedpassword = crypto.createHmac("sha256", salt).update(password).digest("hex");
         
         //creates the 1st session ID
         const sessionid = randomString();
 
-        const newUser = new User({email: email, password: password, salt: salt, name: name, sessionid: sessionid});
+        const newUser = new User({email: email, password: hashedandsaltedpassword, salt: salt, name: name, sessionid: sessionid});
 
         newUser.save().then(() =>{
             console.log('new user created');
@@ -102,7 +102,13 @@ Website.post('/login', (req, res) => {
     User.findOne({email: req.body.email}).exec( (err, user) => {
         console.log(user);
 
-        if(req.body.password === user.password){
+        //hash incoming password and salt 
+        const pass = req.body.password;
+        const salt = user.salt;
+
+        const hashedandsaltedpassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
+        //console.log('got here~!');
+        if(hashedandsaltedpassword === user.password){
             console.log("auth successful");
 
             //generates the 2nd session ID
