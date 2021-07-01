@@ -71,19 +71,20 @@ Website.post('/signup', [
 
         return;
     }
+
     else 
     {
         const name = `${req.body.firstname} ${req.body.lastname}`;
         const email = req.body.email;
         const password = req.body.password;
         
-        
+        //creates the 1st session ID
         const sessionid = randomString();
 
         const newUser = new User({email: email, password: password, email: email, sessionid: sessionid});
 
         newUser.save().then(() =>{
-            console.log('new thing created');
+            console.log('new user created');
             res.cookie("SESSION_ID", sessionid, {httpOnly:true});
         });
         res.redirect("/");
@@ -102,7 +103,11 @@ Website.post('/login', (req, res) => {
 
         if(req.body.password === user.password){
             console.log("auth successful");
+
+            //generates the 2nd session ID
             const sessionid = randomString();
+
+            //MongoDB updates the session ID here:
             User.updateOne({email: user.email}, {$set: {"sessionid": sessionid}}).exec((cb)=>{
                 console.log(cb);
             });
