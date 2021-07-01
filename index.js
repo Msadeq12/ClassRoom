@@ -57,13 +57,11 @@ Website.get('/signup', (req, res) => {
 Website.post('/signup', [
     check("firstname", "must have a first name !").not().isEmpty(),
     check("lastname", "must have a last name !").not().isEmpty(),
-    check("Email", "must have an email !").isEmail(),
-    check("Password", "must have a password").not().isEmpty()
+    check("email", "must have an email !").isEmail(),
+    check("password", "must have a password").not().isEmpty()
 ], (req,res) => {
+    
     var errors = validationResult(req);
-    var email = req.body.Email;
-    var password = req.body.Password;
-    var confirmPassword = req.body.confirmPassword;
 
     if (!errors.isEmpty())
     {
@@ -73,34 +71,28 @@ Website.post('/signup', [
 
         return;
     }
-
     else 
     {
-        res.render("home");
+        const name = `${req.body.firstname} ${req.body.lastname}`;
+        const email = req.body.email;
+        const password = req.body.password;
+        
+        
+        const sessionid = randomString();
+
+        const newUser = new User({email: email, password: password, email: email, sessionid: sessionid});
+
+        newUser.save().then(() =>{
+            console.log('new thing created');
+            res.cookie("SESSION_ID", sessionid, {httpOnly:true});
+        });
+        res.redirect("/");
     }
       
     
     res.render('signup');
 });
 
-//handing post request
-Website.post('/signup', (req, res) => {
-    console.log(req.body);
-    const name = `${req.body.firstname} ${req.body.lastname}`;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    const sessionid = randomString();
-
-    const newUser = new User({email: email, password: password, email: email, sessionid: sessionid});
-
-    newUser.save().then(() =>{
-        console.log('new thing created');
-        res.cookie("SESSION_ID", sessionid, {httpOnly:true});
-    });
-
-    
-});
 
 // creates a session after login attempted
 Website.post('/login', (req, res) => {
