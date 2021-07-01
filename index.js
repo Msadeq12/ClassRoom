@@ -80,7 +80,7 @@ Website.post('/signup', [
         
         const sessionid = randomString();
 
-        const newUser = new User({email: email, password: password, email: email, sessionid: sessionid});
+        const newUser = new User({email: email, password: password, name: name, sessionid: sessionid});
 
         newUser.save().then(() =>{
             console.log('new thing created');
