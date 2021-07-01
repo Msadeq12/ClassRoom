@@ -26,6 +26,7 @@ const User = Mongo.model("user",
     {
         email: String,
         password: String,
+        salt: String,
         name: String,
         sessionid: String
     }
@@ -76,12 +77,14 @@ Website.post('/signup', [
     {
         const name = `${req.body.firstname} ${req.body.lastname}`;
         const email = req.body.email;
+        const salt = randomSalt();
         const password = req.body.password;
+        const hashedandsalted = crypto.createHmac("sha256", salt).update(secretPass).digest("hex");
         
         //creates the 1st session ID
         const sessionid = randomString();
 
-        const newUser = new User({email: email, password: password, name: name, sessionid: sessionid});
+        const newUser = new User({email: email, password: password, salt: salt, name: name, sessionid: sessionid});
 
         newUser.save().then(() =>{
             console.log('new user created');
@@ -127,4 +130,8 @@ Website.listen(1550, () => {
 //this function generates a random string which is the session id for a partcular user.
 function randomString (){
     return crypto.randomBytes(32).toString('hex');
+}
+
+function randomSalt () {
+    return crypto.randomBytes(16).toString("hex");
 }
