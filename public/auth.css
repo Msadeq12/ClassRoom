@@ -2,7 +2,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;    
-    color:white;
+    color:tomato;
     font-family: sans-serif;
     padding: 0;
     margin: 0;
@@ -17,16 +17,18 @@ form {
     min-height: 500px;
     display: flex;
     flex-direction: column;
-    background-color:#333333;
+    background-color:#ffffff;
     gap: 10px;
     border-radius: 1rem;
     justify-content: space-between;
     align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 /* class for fieldset from sign-up page */
 
 .eh{
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column; 
     gap: 1rem;
@@ -38,6 +40,7 @@ input{
     border-radius: 5px;
     outline:none;
     border: none;
+    background-color: rgb(235, 235, 235);
 }
 
 .signupTitle{
@@ -47,8 +50,15 @@ input{
 button{
     margin-top: 1rem;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 99em;
     width: 50%;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    background-color: tomato;
+    border: none;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
 }
 
 .error, #error {

@@ -43,7 +43,7 @@ Website.get("/", (req,res) => {
             console.log(user);
         }
         else{
-            res.render("home");
+            res.render("home", {name: user.name});
         }
     });
 
