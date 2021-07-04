@@ -7,6 +7,7 @@ const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const { exec } = require("child_process");
+const { stringify } = require("querystring");
 
 
 const Website = express();
@@ -22,6 +23,7 @@ Mongo.connect("mongodb://localhost:27017/ClassRoom",
     () => console.log("connected to ClassRoom DB...")
 );
 
+//Login users for MongoDB
 const User = Mongo.model("user",
     {
         email: String,
@@ -31,6 +33,31 @@ const User = Mongo.model("user",
         sessionid: String
     }
 );
+
+const Class = Mongo.model("class", 
+    {
+        className: String,
+        classLevel: String,
+        startDate: String,
+        endDate: String,
+        students: Array
+    }
+);
+
+const Student = Mongo.model("student",
+
+    {
+        className: String,
+        studentName: String,
+        age: String,
+        profession: String,
+        nationality: String
+
+    }
+
+
+);
+
 
 Website.get("/", (req,res) => {
 
@@ -106,9 +133,10 @@ Website.post('/login', (req, res) => {
         const pass = req.body.password;
         const salt = user.salt;
 
-        const hashedandsaltedpassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
-        //console.log('got here~!');
-        if(hashedandsaltedpassword === user.password){
+        const hashedInputPassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
+        
+        if(hashedInputPassword === user.password)
+        {
             console.log("auth successful");
 
             //generates the 2nd session ID
@@ -127,6 +155,13 @@ Website.post('/login', (req, res) => {
     });
 });
 
+//Post request for adding a class record
+Website.post("/addclass", (req, res) => {
+
+    const newClass = new Class()
+
+})
+
 Website.listen(1550, () => {
     console.log("Listening at 1550...");
 });
@@ -136,6 +171,7 @@ function randomString (){
     return crypto.randomBytes(32).toString('hex');
 }
 
+//this function generates a random string for the salted passwords.
 function randomSalt () {
     return crypto.randomBytes(16).toString("hex");
 }
