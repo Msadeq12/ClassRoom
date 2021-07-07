@@ -52,7 +52,42 @@ main{
 }
 
 .class:hover{
-    transform: scale(1.05);
-    transition: ease-in 200ms;
+    background-color: #33333310;
     box-shadow: rgba(110, 110, 110, 0.2) 0px 9px 12px 0px;
+}
+
+.add{
+    align-items: center;
+    justify-content: center;
+    color: #727272;
+}
+
+.add-class-bg{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: #00000048;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-class-form {
+    display: flex;
+    padding: 10px 20px;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    border: 0.2px solid rgb(218, 218, 218);
+    border-radius: 10px;
+    box-shadow: rgba(110, 110, 110, 0.2) 0px 7px 9px 0px;
+}
+
+.add-class-form input{
+    padding: 5px 0;
+    font-size: 1.2em;
+    margin: 10px 0;
 }
