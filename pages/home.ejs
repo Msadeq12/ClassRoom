@@ -1,13 +1,73 @@
 <head>
     <link rel="stylesheet" href="page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+
+    <div class="add-class-bg">
+            <form class="add-class-form" action="POST">
+                <h2>Create Class</h2>
+
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="subject">
+
+                
+                <label for="subject">Level</label>
+                <input type="text" name="level" id="level">
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                    <button id="cancel-button">Cancel</button>
+                    <button disabled type="submit">Create</button>
+                </div>
+            </form>
+    </div>
+    
     <%- include('header'); %>
-    
-    <h1>Welcome <%=name %></h1>
+    <main>
+        <h1>Welcome <%=name %></h1>
 
-    
+        <h2>Your classes</h2>
 
+        <div class="classes">
+                <div class="class">
+                    <h3>French</h3>
+                    <p>Level: Intermediate</p>
+                    <p>Students: 10</p>
+                </div>
+                
+                <div class="class">
+                    <h3>Math</h3>
+                    <p>Level: Basic</p>
+                    <p>Students: 11</p>
+                </div>
+                <div id="add-class" class="class add">
+                    <i class="fa fa-plus"></i> Add Class
+                </div>
+            </a>
+        </div>
+    </main>
 
+    <script>
+        const addClass = document.querySelector('#add-class');
+        const addClassForm = document.querySelector('.add-class-bg');
+
+        addClass.addEventListener('click', e => {
+            console.log('hi');
+            addClassForm.style.display = "flex";
+        });
+
+        const cancelButton = document.querySelector('#cancel-button');
+
+        cancelButton.addEventListener('click', e => {
+            e.preventDefault();
+            addClassForm.style.display = "none";
+        });
+
+        window.addEventListener('click', e => {
+            if(e.target == addClassForm){
+                addClassForm.style.display = "none";
+            }
+        });
+    </script>
 
 </body>
