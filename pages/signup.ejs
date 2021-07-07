@@ -3,8 +3,14 @@
 </head>
 
 <!-- Zuhair was here-->
+
+
+
+
     <body>
-        <form method="POST" action = "/signup">
+
+        <form method="POST">
+
             <fieldset class="eh">
 
                 <legend class = "signupTitle">Sign Up</legend>
@@ -19,55 +25,41 @@
                 <input type = "email" name = "email">
                 
                 <label for = "password">Password: </label>
-                <input type = "password" name = "password">
+                <input type = "text" name = "password" id = "password">
 
                 <label for = "passwordConfirm">Confirm Password: </label>
-                <input type = "password" name = "passwordConfirm" id = "password2">    
+                <input type = "text" name = "passwordConfirm" id = "password2">
                             
             </fieldset>
 
-            
+            <button type = "submit" name = "submit" id = "submitButton">Submit</button>
 
-            <button type = "submit" name = "submit" id = "submit">Submit</button>
-            
             <p id = "error"></p>
-            
+
             <script>
+                var button = document.getElementById("submitButton");
                 var password = document.getElementById("password").innerHTML;
-                var password2 = document.getElementById("passwordConfirm").innerHTML;
-                var submit = document.getElementById("submit");
+                var password2 = document.getElementById("password2").innerHTML;
 
                 if (password !== password2)
                 {
-                    document.getElementById("error").innerHTML = "Passwords do not match !";
-                    submit.disabled = true;
+                    button.disabled = true;
                 }
-                
+
                 else
                 {
-                    submit.disabled = false;
-
+                    button.disabled = false;
                 }
+            
             </script>
-                
-            <% if(typeof errors !== 'undefined'){
-                for(var error of errors){
-                %>
-                    <p class = "error"><%= error.msg %></p>
-                <%
-                }
-            }
-            %>
-
-            
-
-            
-                        
-
-
-
-            
-
 
         </form>
+
+
+        
+
+        
+
     </body>
+
+    

@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const { exec } = require("child_process");
 const { stringify } = require("querystring");
+const internal = require("stream");
 
 
 const Website = express();
@@ -65,11 +66,17 @@ Website.get("/", (req,res) => {
     
 
     User.findOne({sessionid: sessionid}).exec((err, user) => {
+        
         if(err || user === null){
-            res.render('login');
+            
             console.log(user);
+            
+            res.render("login");
+            
         }
-        else{
+
+        else
+        {
             res.render("home", {name: user.name});
         }
     });
@@ -113,7 +120,7 @@ Website.post('/signup', [
 
         const newUser = new User({email: email, password: hashedandsaltedpassword, salt: salt, name: name, sessionid: sessionid});
 
-        newUser.save().then(() =>{
+        newUser.save().then(() => {
             console.log('new user created');
             res.cookie("SESSION_ID", sessionid, {httpOnly:true});
             res.redirect("/");
@@ -126,16 +133,29 @@ Website.post('/signup', [
 // creates a session after login attempted
 Website.post('/login', (req, res) => {
     console.log(req.body);
+
     User.findOne({email: req.body.email}).exec( (err, user) => {
-        console.log(user);
+        console.log("User: " + user);
+        console.log("err: " + err);
+
+        //if email doesn't match ...
+        
+        if (user === null)
+        {
+            
+            res.status(404).render("login", {
+                message: "Invalid email !"
+            });
+    
+        }
 
         //hash incoming password and salt 
         const pass = req.body.password;
         const salt = user.salt;
 
         const hashedInputPassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
-        
-        if(hashedInputPassword === user.password)
+
+        if (hashedInputPassword === user.password)
         {
             console.log("auth successful");
 
@@ -152,8 +172,29 @@ Website.post('/login', (req, res) => {
             res.redirect('/');
         }
 
+        // if password doesm't match ...
+        else
+        {
+            res.status(404).render("login", {
+                message: "Invalid credentials !"
+            });
+        }
+
     });
+    
+    
+        
+    
+
+    
+    
+
+    
+    
+    
+         
 });
+
 
 //Post request for adding a class record
 Website.post("/addclass", (req, res) => {
