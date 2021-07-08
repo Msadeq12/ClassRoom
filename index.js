@@ -80,6 +80,9 @@ Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+Website.get('/class', (req, res) => {
+    res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"}]});
+});
 
 //handing post requests from the signup page.
 Website.post('/signup', [
