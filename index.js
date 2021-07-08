@@ -85,6 +85,9 @@ Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+Website.get('/class', (req, res) => {
+    res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"}]});
+});
 Website.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.redirect('/login');
