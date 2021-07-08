@@ -1,11 +1,9 @@
 <head>
     <link rel="stylesheet" href="auth.css">
+
 </head>
 
 <!-- Zuhair was here-->
-
-
-
 
     <body>
 
@@ -25,7 +23,7 @@
                 <input type = "email" name = "email">
                 
                 <label for = "password">Password: </label>
-                <input type = "text" name = "password" id = "password">
+                <input type = "text" name = "password" id = "password3">
 
                 <label for = "passwordConfirm">Confirm Password: </label>
                 <input type = "text" name = "passwordConfirm" id = "password2">
@@ -33,33 +31,45 @@
             </fieldset>
 
             <button type = "submit" name = "submit" id = "submitButton">Submit</button>
-
-            <p id = "error"></p>
-
-            <script>
-                var button = document.getElementById("submitButton");
-                var password = document.getElementById("password").innerHTML;
-                var password2 = document.getElementById("password2").innerHTML;
-
-                if (password !== password2)
-                {
-                    button.disabled = true;
-                }
-
-                else
-                {
-                    button.disabled = false;
-                }
             
-            </script>
-
+            
+            
         </form>
 
+            
+            
+               <% if (typeof errors !== "undefined")
+                    {
+                        for (var error of errors )
+                        {
+                            %>
 
-        
+                                <p class = "error"><%= error.msg %></p>
 
-        
+                            <%
+
+
+                        }
+                    }
+
+                %>
+
+                <% if (typeof message !== "undefined")
+                    {
+                        %>
+                            <p class = "error"><%= message %></p>
+                        <%
+
+                    }
+                %>
+                    
+            
+             
+
+       
 
     </body>
+
+    
 
     

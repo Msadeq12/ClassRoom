@@ -6,8 +6,6 @@ const { urlencoded } = require("body-parser");
 const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const session = require("express-session");
-const { exec } = require("child_process");
-const { stringify } = require("querystring");
 const internal = require("stream");
 
 
@@ -87,6 +85,13 @@ Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+Website.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/login');
+    })
+    
+})
+
 
 //handing post requests from the signup page.
 Website.post('/signup', [
@@ -97,14 +102,24 @@ Website.post('/signup', [
 ], (req,res) => {
     
     var errors = validationResult(req);
+    var password = req.body.password;
+    var password2 = req.body.passwordConfirm;
 
+    //validations for all signup input
     if (!errors.isEmpty())
     {
         res.render("signup", {
             errors:errors.array()
         });
 
-        return;
+    }
+
+    // validation for confirming password
+    if (password !== password2)
+    {
+        res.render("signup", {
+            message: "Passwords do not match !"
+        });
     }
 
     else 
