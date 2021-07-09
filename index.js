@@ -108,42 +108,60 @@ Website.post('/signup', [
     var password = req.body.password;
     var password2 = req.body.passwordConfirm;
 
-    //validations for all signup input
-    if (!errors.isEmpty())
-    {
-        res.render("signup", {
-            errors:errors.array()
-        });
+    //validation for same email address
+    User.findOne({email: req.body.email}).exec((err, user) => {
+        console.log("user: " + user);
 
-    }
+        if (user !== null)
+        {
+            res.render("signup", {
+                message: "Email address is already taken !"
+            });
+        }
 
-    // validation for confirming password
-    if (password !== password2)
-    {
-        res.render("signup", {
-            message: "Passwords do not match !"
-        });
-    }
+        else
+        {
+            //validations for all signup input
+            if (!errors.isEmpty())
+            {
+                    res.render("signup", {
+                    errors:errors.array()
+                });
 
-    else 
-    {
-        const name = `${req.body.firstname} ${req.body.lastname}`;
-        const email = req.body.email;
-        const salt = randomSalt();
-        const password = req.body.password;
-        const hashedandsaltedpassword = crypto.createHmac("sha256", salt).update(password).digest("hex");
+            }
+
+            // validation for confirming password
+            if (password !== password2)
+            {
+                res.render("signup", {
+                    message: "Passwords do not match !"
+                });
+            }
+
+            else 
+            {
+                const name = `${req.body.firstname} ${req.body.lastname}`;
+                const email = req.body.email;
+                const salt = randomSalt();
+                const password = req.body.password;
+                const hashedandsaltedpassword = crypto.createHmac("sha256", salt).update(password).digest("hex");
         
-        //creates the 1st session ID
-        const sessionid = randomString();
+                //creates the 1st session ID
+                const sessionid = randomString();
 
-        const newUser = new User({email: email, password: hashedandsaltedpassword, salt: salt, name: name, sessionid: sessionid});
+                const newUser = new User({email: email, password: hashedandsaltedpassword, salt: salt, name: name, sessionid: sessionid});
 
-        newUser.save().then(() => {
-            console.log('new user created');
-            res.cookie("SESSION_ID", sessionid, {httpOnly:true});
-            res.redirect("/");
-        });
-    }
+                newUser.save().then(() => {
+                console.log('new user created');
+                res.cookie("SESSION_ID", sessionid, {httpOnly:true});
+                res.redirect("/");
+                });
+            }
+
+        }
+    });
+
+    
 
 });
 
