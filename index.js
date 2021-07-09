@@ -88,12 +88,12 @@ Website.get('/signup', (req, res) => {
 Website.get('/class', (req, res) => {
     res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"}]});
 });
-Website.get("/logout", (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/login');
-    })
-    
-})
+
+//handle logout
+Website.get('/logout', (req, res) =>  {
+    res.cookie('SESSION_ID', '', {maxAge: 1});
+    res.redirect('/');
+});
 
 
 //handing post requests from the signup page.
