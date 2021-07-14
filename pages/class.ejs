@@ -11,7 +11,14 @@
 
     <h2><%=level %></h2>
 
-    <%- for(let i = 0; i < students.length; i++) { %>
-        
+    <h3>Students</h3>
+
+    <table width="400px">
+        <tr><th>Name</th> <th>Age</th> <th>Profession</th></tr>
+        <% for(let i = 0; i < students.length; i++) { %>
+           <tr><td><%=students[i].name%></td> <td><%=students[i].age%></td> <td><%=students[i].profession%></td></tr> 
+        <% } %>
+    </table>
+ 
 </body>
 </html>
