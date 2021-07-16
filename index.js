@@ -246,7 +246,7 @@ Website.post("/addclass", (req, res) => {
         
         newClass.save().then(() => {
             console.log("class added !");
-            redirect('/')
+            res.redirect('/')
         });
     });
 
