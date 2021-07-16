@@ -39,6 +39,7 @@ const Class = Mongo.model("class",
         classLevel: String,
         startDate: String,
         endDate: String,
+        level: String,
         userid: String,
         students: Array
     }
