@@ -10,17 +10,17 @@
             <form class = "add-class-form" action = "/addclass" method = "POST">
                 <h2>Create Class</h2>
 
-                <label for="subject">Subject</label>
-                <input type = "text" name = "subject" id = "subject">
+                <label for="className">Class Name</label>
+                <input required type = "text" name = "className" id = "className">
 
                 <label for = "subject">Level</label>
-                <input type = "text" name = "level" id = "level">
+                <input required type = "text" name = "level" id = "level">
 
                 <label for = "startDate">Start Date</label>
-                <input type = "date" name = "startDate">
+                <input required type = "date" name = "startDate">
 
                 <label for = "endDate">End Date</label>
-                <input type = "date" name = "endDate">
+                <input required type = "date" name = "endDate">
 
                 <label for = "student">Add Student</label>
                 <textarea class = "add-student"></textarea>
@@ -29,7 +29,7 @@
 
                 <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                     <button id="cancel-button">Cancel</button>
-                    <button disabled type="submit">Create</button>
+                    <button type="submit">Create</button>
                 </div>
 
             </form>
@@ -79,7 +79,13 @@
         <h2>Your classes</h2>
 
         <div class="classes">
-
+            <% for(let i = 0; i < classes.length; i++) { %>
+                <div class="class">
+                    <a href="class"><h3><%=classes[i].className %></h3></a>
+                    <p>Level: <%=classes[i].className %></p>
+                    <p>Students: <%=classes[i].students.length %></p>
+                </div>
+            <% } %>
                 <!-- <div class="class">
                     <a href="class"><h3>French</h3></a>
                     <p>Level: Intermediate</p>

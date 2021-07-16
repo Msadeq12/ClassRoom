@@ -39,6 +39,7 @@ const Class = Mongo.model("class",
         classLevel: String,
         startDate: String,
         endDate: String,
+        userid: String,
         students: Array
     }
 );
@@ -75,7 +76,11 @@ Website.get("/", (req,res) => {
 
         else
         {
-            res.render("home", {name: user.name});
+            Class.find({userid: user._id}, (err, docs) =>{
+                console.log(docs);
+                res.render("home", {name: user.name, classes: docs});
+            });
+            
         }
     });
 
@@ -86,7 +91,9 @@ Website.get('/signup', (req, res) => {
 });
 
 Website.get('/class', (req, res) => {
-    res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"}]});
+    console.log(req.params.id);
+
+    res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"}]});
 });
 
 //handle logout
@@ -228,12 +235,21 @@ Website.post('/login', (req, res) => {
 
 //Post request for adding a class record
 Website.post("/addclass", (req, res) => {
+    console.log(req.body);
 
-    const newClass = new Class({className: className, classLevel: classLevel, startDate: startDate, endDate: endDate, students: students});
-    
-    newClass.save().then(() => {
-        console.log("class added !");
-    })
+    User.findOne({sessionid: req.cookies.SESSION_ID}).exec((err, user) => {
+        const userid = user._id;
+
+        console.log(userid);
+        const newClass = new Class({className: req.body.className, level: req.body.level, startDate: req.body.startDate, endDate: req.body.endDate, userid: userid});
+        
+        newClass.save().then(() => {
+            console.log("class added !");
+            redirect('/')
+        });
+    });
+
+
 
 })
 
