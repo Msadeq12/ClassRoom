@@ -3,22 +3,35 @@
 <head>
     <title>French Intermediate</title>
     <link rel="stylesheet" href="page.css">
+    <link rel="stylesheet" href="class.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <%- include('header'); %>
 
-    <h1><%=name %></h1>
+    <main>
+        <h1><%=name %> <%=level %></h1>
+        
+        <h2>Lessons</h2>
 
-    <h2><%=level %></h2>
 
-    <h3>Students</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Students</h2> <i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></i>
+        </div>
+        
+        <div class="students">
+            
 
-    <table width="400px">
-        <tr><th>Name</th> <th>Age</th> <th>Profession</th></tr>
-        <% for(let i = 0; i < students.length; i++) { %>
-           <tr><td><%=students[i].name%></td> <td><%=students[i].age%></td> <td><%=students[i].profession%></td></tr> 
-        <% } %>
-    </table>
+                <% for(let i = 0; i < students.length; i++) { %>
+                <div class="student"><span><%=students[i].name%></span> <span><%=students[i].age%></span> <span><%=students[i].profession%></span></div> 
+                <% } %>
+
+        </div>
+
+       
+
+    </main>
+    
  
 </body>
 </html>
