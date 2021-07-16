@@ -4,22 +4,72 @@
 </head>
 <body>
 
-    <div class="add-class-bg">
-            <form class="add-class-form" action="POST">
+    <!-- The Add Class form -->
+
+    <div class = "add-class-bg">
+            <form class = "add-class-form" action = "/addclass" method = "POST">
                 <h2>Create Class</h2>
 
                 <label for="subject">Subject</label>
-                <input type="text" name="subject" id="subject">
+                <input type = "text" name = "subject" id = "subject">
 
-                
-                <label for="subject">Level</label>
-                <input type="text" name="level" id="level">
+                <label for = "subject">Level</label>
+                <input type = "text" name = "level" id = "level">
+
+                <label for = "startDate">Start Date</label>
+                <input type = "date" name = "startDate">
+
+                <label for = "endDate">End Date</label>
+                <input type = "date" name = "endDate">
+
+                <label for = "student">Add Student</label>
+                <textarea class = "add-student"></textarea>
+
+            
 
                 <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                     <button id="cancel-button">Cancel</button>
                     <button disabled type="submit">Create</button>
                 </div>
+
             </form>
+    </div>
+
+    <!-- Add Student Form -->
+    
+    <div class = "studentSpace">
+        <form id = "Student">
+
+            <h2>Add Student</h2>
+
+            <label for = "firstName">First Name</label>
+            <input type = "text" name = "firstName">
+
+            <label for = "lastName">Last Name</label>
+            <input type = "text" name = "lastName">
+
+            <label for = "DOB">Date of Birth</label>
+            <input type = "date" name = "DOB">
+
+            <label for = "address">Address</label>
+            <input type = "text" name = "address">
+
+            <label for = "city">City</label>
+            <input type = "text" name = "city">
+
+            <label for = "country">Country</label>
+            <input type = "text" name = "country">
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                <button id = "student-cancel">Cancel</button>
+                <button disabled type = "submit">Create</button>
+            </div>
+
+            
+
+
+
+        </form>
     </div>
     
     <%- include('header'); %>
@@ -29,7 +79,8 @@
         <h2>Your classes</h2>
 
         <div class="classes">
-                <div class="class">
+
+                <!-- <div class="class">
                     <a href="class"><h3>French</h3></a>
                     <p>Level: Intermediate</p>
                     <p>Students: 10</p>
@@ -39,35 +90,58 @@
                     <h3>Math</h3>
                     <p>Level: Basic</p>
                     <p>Students: 11</p>
-                </div>
+                </div> -->
+
                 <div id="add-class" class="class add">
                     <i class="fa fa-plus"></i> Add Class
                 </div>
             </a>
-        </div>
+        </div> 
+
+
     </main>
 
     <script>
         const addClass = document.querySelector('#add-class');
         const addClassForm = document.querySelector('.add-class-bg');
+        const addStudent = document.querySelector(".add-student");
+        const Student = document.querySelector(".studentSpace");
 
+        // the add class form event 
         addClass.addEventListener('click', e => {
             console.log('hi');
             addClassForm.style.display = "flex";
         });
 
         const cancelButton = document.querySelector('#cancel-button');
+        const cancel2 = document.querySelector("#student-cancel")
 
+        // add class form cancel button
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
             addClassForm.style.display = "none";
         });
 
+        // add student cancel button
+        cancel2.addEventListener("click", e => {
+            e.preventDefault();
+            Student.style.display = "none";
+        });
+
+
+
+
         window.addEventListener('click', e => {
-            if(e.target == addClassForm){
+            if (e.target == addClassForm)
+            {
                 addClassForm.style.display = "none";
             }
         });
+
+        // activates add student form
+        addStudent.addEventListener("click", e => {
+            Student.style.display = "flex";
+        })
 
         
     </script>

@@ -185,49 +185,43 @@ Website.post('/login', (req, res) => {
     
         }
 
-        //hash incoming password and salt 
-        const pass = req.body.password;
-        const salt = user.salt;
-
-        const hashedInputPassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
-
-        if (hashedInputPassword === user.password)
+        else 
         {
-            console.log("auth successful");
+             //hash incoming password and salt 
+            const pass = req.body.password;
+            const salt = user.salt;
 
-            //generates the 2nd session ID
-            const sessionid = randomString();
+            const hashedInputPassword = crypto.createHmac('sha256', salt).update(pass).digest('hex');
 
-            //MongoDB updates the session ID here:
-            User.updateOne({email: user.email}, {$set: {"sessionid": sessionid}}).exec((cb)=>{
+            if (hashedInputPassword === user.password)
+            {
+                console.log("auth successful");
+
+                //generates the 2nd session ID
+                const sessionid = randomString();
+
+                //MongoDB updates the session ID here:
+                User.updateOne({email: user.email}, {$set: {"sessionid": sessionid}}).exec((cb)=>{
                 console.log(cb);
-            });
+                });
             
 
-            res.cookie("SESSION_ID", sessionid, {httpOnly:true});
-            res.redirect('/');
-        }
+                res.cookie("SESSION_ID", sessionid, {httpOnly:true});
+                res.redirect('/');
+            }
 
-        // if password doesm't match ...
-        else
-        {
-            res.status(404).render("login", {
-                message: "Invalid credentials !"
-            });
+            // if password doesm't match ...
+            else
+            {
+                res.status(404).render("login", {
+                    message: "Invalid credentials !"
+                });
+            }
+
         }
 
     });
-    
-    
-        
-    
-
-    
-    
-
-    
-    
-    
+       
          
 });
 
@@ -235,7 +229,11 @@ Website.post('/login', (req, res) => {
 //Post request for adding a class record
 Website.post("/addclass", (req, res) => {
 
-    const newClass = new Class()
+    const newClass = new Class({className: className, classLevel: classLevel, startDate: startDate, endDate: endDate, students: students});
+    
+    newClass.save().then(() => {
+        console.log("class added !");
+    })
 
 })
 
