@@ -81,7 +81,7 @@
         <div class="classes">
             <% for(let i = 0; i < classes.length; i++) { %>
                 <div class="class">
-                    <a href="class"><h3><%=classes[i].className %></h3></a>
+                    <a href="class/<%=classes[i]._id %>"><h3><%=classes[i].className %></h3></a>
                     <p>Level: <%=classes[i].level %></p>
                     <p>Students: <%=classes[i].students.length %></p>
                 </div>
