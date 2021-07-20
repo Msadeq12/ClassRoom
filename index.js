@@ -40,7 +40,8 @@ const Class = Mongo.model("class",
         startDate: String,
         endDate: String,
         level: String,
-        userid: String
+        userid: String,
+        students: Array
     }
 );
 
@@ -76,19 +77,13 @@ Website.get("/", (req,res) => {
 
         else
         {
-            Class.findOne({userid: user._id}, (err, docs) => {
+            Class.find({userid: user._id}, (err, docs) => {
                 console.log(docs);
 
-                if (docs !== null)
-                {
-                    res.render("home", {name: user.name, classes: docs});
-                }
-
-                else
-                {
-                    res.render("home", {name: user.name, classes: ""} );
-                }
-
+           
+                res.render("home", {name: user.name, classes: docs});
+         
+    
                 
             });
             
