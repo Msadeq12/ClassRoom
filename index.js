@@ -33,6 +33,20 @@ const User = Mongo.model("user",
     }
 );
 
+const Student = Mongo.Schema(
+
+    {
+        firstName: String,
+        lastName: String,
+        DOB: String,
+        address: String,
+        city: String,
+        country: String
+
+    }
+
+);
+
 const Class = Mongo.model("class", 
     {
         className: String,
@@ -41,23 +55,11 @@ const Class = Mongo.model("class",
         endDate: String,
         level: String,
         userid: String,
-        students: Array
+        students: [Student]
     }
 );
 
-const Student = Mongo.model("student",
 
-    {
-        className: String,
-        studentName: String,
-        age: String,
-        profession: String,
-        nationality: String
-
-    }
-
-
-);
 
 
 Website.get("/", (req,res) => {
@@ -171,9 +173,9 @@ Website.post('/signup', [
                 const newUser = new User({email: email, password: hashedandsaltedpassword, salt: salt, name: name, sessionid: sessionid});
 
                 newUser.save().then(() => {
-                console.log('new user created');
-                res.cookie("SESSION_ID", sessionid, {httpOnly:true});
-                res.redirect("/");
+                    console.log('new user created');
+                    res.cookie("SESSION_ID", sessionid, {httpOnly:true});
+                    res.redirect("/");
                 });
             }
 
@@ -264,6 +266,45 @@ Website.post("/addclass", (req, res) => {
 
 
 })
+
+//Post request for adding a student to a class
+
+Website.post('/class/:id', (req, res) => {
+    const classid = req.params.id;
+    const sessionid = req.cookies.SESSION_ID;
+
+    const data = req.body;
+
+    console.log('classid', classid);
+    console.log('sessionid', sessionid)
+
+    console.log("Data", data);
+
+    User.findOne({sessionid: sessionid}).exec((err, user) =>{
+        if(err || user === null){
+            console.error('this user is not authenticated');
+            res.redirect('/login');
+        }
+        else{
+            Class.findOne({_id: classid}).exec((err, classdoc) => {
+                if(err){
+                    //handle error
+                }else{
+                    if(classdoc.userid == user._id){
+                        classdoc.students.push(data);
+                        classdoc.save()
+                            .then( saveddoc => {
+                                console.log('Added a new student', saveddoc);
+                                res.redirect('back');
+                            })
+                            .catch(err => res.send(err));
+                    }
+                }
+            });
+        }
+    });
+
+});
 
 Website.listen(1550, () => {
     console.log("Listening at 1550...");

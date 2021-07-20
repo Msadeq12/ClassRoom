@@ -92,7 +92,7 @@ main{
     box-shadow: rgba(110, 110, 110, 0.2) 0px 7px 9px 0px;
 }
 
-.add-class-form input{
+input{
     padding: 5px 0;
     font-size: 1.2em;
     margin: 10px 0;

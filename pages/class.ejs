@@ -9,21 +9,59 @@
 <body>
     <%- include('header'); %>
 
+        <!-- Add Student Form -->
+    
+        <div class = "studentSpace">
+            <form id = "Student" method="POST">
+    
+                <h2>Add Student</h2>
+    
+                <label for = "firstName">First Name</label>
+                <input type = "text" name = "firstName">
+    
+                <label for = "lastName">Last Name</label>
+                <input type = "text" name = "lastName">
+    
+                <label for = "DOB">Date of Birth</label>
+                <input type = "date" name = "DOB">
+    
+                <label for = "address">Address</label>
+                <input type = "text" name = "address">
+    
+                <label for = "city">City</label>
+                <input type = "text" name = "city">
+    
+                <label for = "country">Country</label>
+                <input type = "text" name = "country">
+    
+                <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                    <button id = "student-cancel">Cancel</button>
+                    <button type = "submit">Create</button>
+                </div>
+    
+                
+    
+    
+    
+            </form>
+        </div>
+
     <main>
         <h1><%=className %> <%=level %></h1>
         
-        <h2>Lessons</h2>
-
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
+        </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Students</h2> <i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></i>
+            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
         </div>
         
         <div class="students">
             
 
                 <% for(let i = 0; i < students.length; i++) { %>
-                <div class="student"><span><%=students[i].name%></span> <span><%=students[i].age%></span> <span><%=students[i].profession%></span></div> 
+                <div class="student"><span><%=students[i].firstName%> <%=students[i].lastName%></span> </div> 
                 <% } %>
 
         </div>
@@ -32,6 +70,15 @@
 
     </main>
     
+    <script>
+        
+        const addStudent = document.querySelector('#addStudent');
+        const Student = document.querySelector('.studentSpace');
+        addStudent.addEventListener("click", e => {
+            Student.style.display = "flex";
+        });
+
+    </script>
  
 </body>
 </html>
