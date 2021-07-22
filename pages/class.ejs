@@ -9,42 +9,58 @@
 <body>
     <%- include('header'); %>
 
-        <!-- Add Student Form -->
-    
-        <div class = "studentSpace">
-            <form id = "Student" method="POST">
-    
-                <h2>Add Student</h2>
-    
-                <label for = "firstName">First Name</label>
-                <input type = "text" name = "firstName">
-    
-                <label for = "lastName">Last Name</label>
-                <input type = "text" name = "lastName">
-    
-                <label for = "DOB">Date of Birth</label>
-                <input type = "date" name = "DOB">
-    
-                <label for = "address">Address</label>
-                <input type = "text" name = "address">
-    
-                <label for = "city">City</label>
-                <input type = "text" name = "city">
-    
-                <label for = "country">Country</label>
-                <input type = "text" name = "country">
-    
-                <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                    <button id = "student-cancel">Cancel</button>
-                    <button type = "submit">Create</button>
-                </div>
-    
-                
-    
-    
-    
-            </form>
-        </div>
+    <!-- Add Student Form -->
+
+    <div class = "popupbg">
+        <form id = "addStudentForm" method="POST" action="/addstudent/<%=_id %>">
+
+            <h2>Add Student</h2>
+
+            <label for = "firstName">First Name</label>
+            <input type = "text" name = "firstName">
+
+            <label for = "lastName">Last Name</label>
+            <input type = "text" name = "lastName">
+
+            <label for = "DOB">Date of Birth</label>
+            <input type = "date" name = "DOB">
+
+            <label for = "address">Address</label>
+            <input type = "text" name = "address">
+
+            <label for = "city">City</label>
+            <input type = "text" name = "city">
+
+            <label for = "country">Country</label>
+            <input type = "text" name = "country">
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                <button id = "student-cancel">Cancel</button>
+                <button type = "submit">Create</button>
+            </div>
+        </form>
+    </div>
+
+    <div class = "popupbg">
+        <form id = "addLessonForm" method="POST" action="/addlesson/<%=_id %>" autocomplete="off">
+
+            <h2>Add Student</h2>
+
+            <label for = "name">Lesson Name</label>
+            <input type = "text" name = "name">
+
+            
+
+            <label for = "DOB">Date of Birth</label>
+            <input type = "date" name = "DOB">
+
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                <button id = "student-cancel">Cancel</button>
+                <button type = "submit">Create</button>
+            </div>
+        </form>
+    </div>
 
     <main>
         <h1><%=className %> <%=level %></h1>
@@ -73,10 +89,34 @@
     <script>
         
         const addStudent = document.querySelector('#addStudent');
-        const Student = document.querySelector('.studentSpace');
+        const addLesson = document.querySelector('#addLesson');
+
+        const addStudentForm = document.querySelector('#addStudentForm');
+        const addLessonForm = document.querySelector('#addLessonForm');
+        
+       
+        const popupbg = document.querySelectorAll('.popupbg');
+
+        
+       
+
         addStudent.addEventListener("click", e => {
-            Student.style.display = "flex";
+            addStudentForm.parentElement.style.display = "flex";
         });
+
+        addLesson.addEventListener('click', e=>{
+            addLessonForm.parentElement.style.display= "flex";
+            console.log('hello')
+        });
+
+
+        window.addEventListener('click', e=>{
+            popupbg.forEach(popup => {
+                if(e.target == popup){
+                    popup.style.display = "none";
+                }
+            });
+        })
 
     </script>
  

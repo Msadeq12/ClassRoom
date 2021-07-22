@@ -25,3 +25,14 @@ h2{
 i{
     font-weight: 300;
 }
+
+form{
+    display: flex;
+    padding: 10px 20px;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    border: 0.2px solid rgb(218, 218, 218);
+    border-radius: 10px;
+    box-shadow: rgba(110, 110, 110, 0.2) 0px 7px 9px 0px;
+}

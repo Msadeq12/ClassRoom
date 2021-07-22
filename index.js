@@ -47,6 +47,13 @@ const Student = Mongo.Schema(
 
 );
 
+const Lesson = Mongo.Schema(
+    {
+        name:String,
+        about:String,
+        present: [String]
+    }
+);
 const Class = Mongo.model("class", 
     {
         className: String,
@@ -55,7 +62,8 @@ const Class = Mongo.model("class",
         endDate: String,
         level: String,
         userid: String,
-        students: [Student]
+        students: [Student],
+        lessons: [Lesson]
     }
 );
 
@@ -269,7 +277,7 @@ Website.post("/addclass", (req, res) => {
 
 //Post request for adding a student to a class
 
-Website.post('/class/:id', (req, res) => {
+Website.post('/addstudent/:id', (req, res) => {
     const classid = req.params.id;
     const sessionid = req.cookies.SESSION_ID;
 
@@ -292,6 +300,43 @@ Website.post('/class/:id', (req, res) => {
                 }else{
                     if(classdoc.userid == user._id){
                         classdoc.students.push(data);
+                        classdoc.save()
+                            .then( saveddoc => {
+                                console.log('Added a new student', saveddoc);
+                                res.redirect('back');
+                            })
+                            .catch(err => res.send(err));
+                    }
+                }
+            });
+        }
+    });
+
+});
+
+Website.post('/addlesson/:id', (req, res) =>{
+    const classid = req.params.id;
+    const sessionid = req.cookies.SESSION_ID;
+
+    const data = req.body;
+
+    console.log('classid', classid);
+    console.log('sessionid', sessionid)
+
+    console.log("Data", data);
+
+    User.findOne({sessionid: sessionid}).exec((err, user) =>{
+        if(err || user === null){
+            console.error('this user is not authenticated');
+            res.redirect('/login');
+        }
+        else{
+            Class.findOne({_id: classid}).exec((err, classdoc) => {
+                if(err){
+                    //handle error
+                }else{
+                    if(classdoc.userid == user._id){
+                        classdoc.lessons.push(data);
                         classdoc.save()
                             .then( saveddoc => {
                                 console.log('Added a new student', saveddoc);
