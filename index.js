@@ -101,10 +101,16 @@ Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-Website.get('/class', (req, res) => {
+Website.get('/class/:id', (req, res) => {
     console.log(req.params.id);
-
-    res.render('class', {name: "French" , level: "Intermediate", students: [{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"},{name: "Mary", age: 21, profession:"Doctor"}]});
+    Class.findOne({_id: req.params.id}).exec((err, classDoc) => {
+        if(classDoc === null){
+            res.status('404');
+        }else{
+            res.render('class', classDoc);
+        }
+    })
+    
 });
 
 //handle logout
