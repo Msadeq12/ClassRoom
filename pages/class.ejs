@@ -43,20 +43,26 @@
         </form>
     </div>
 
+    <!-- Lesson form -->
+    
     <div class = "popupbg">
         <form id = "addLessonForm" method="POST" action="/addlesson/<%=_id %>" autocomplete="off">
 
-            <h2>Add Student</h2>
+            <h2>Add Lessons</h2>
 
             <label for = "name">Lesson Name</label>
-            <input type = "text" name = "name">
+            <input type = "text" name = "lessonName">
+
+            <label for = "chapter">Chapter</label>
+            <input type = "text" name = "chapter">
+
+            <label for = "lessonPages">Lesson Pages</label>
+            <input type = "text" name = "lessonPages">
+
+            <label for = "lessonDate">Lesson Date</label>
+            <input type = "date" name = "lessonDate">
 
             
-
-            <label for = "DOB">Date of Birth</label>
-            <input type = "date" name = "DOB">
-
-
             <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                 <button id = "student-cancel">Cancel</button>
                 <button type = "submit">Create</button>
@@ -72,15 +78,26 @@
             <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
         </div>
 
+        <!-- List of lessons in this class -->
+
+        <div class = "lessons">
+
+            
+
+        </div>
+        
+
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
         </div>
         
-        <div class="students">
+        <!-- List of students of the class -->
+
+        <div class = "students">
             
 
-                <% for(let i = 0; i < students.length; i++) { %>
-                <div class="student"><span><%=students[i].firstName%> <%=students[i].lastName%></span> </div> 
+                <% for (student of students) { %>
+                <div class = "student"><a href = "student.ejs"><%= student.firstName %> <%= student.lastName %></a>"</div> 
                 <% } %>
 
         </div>

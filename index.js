@@ -296,23 +296,29 @@ Website.post('/addstudent/:id', (req, res) => {
     console.log("Data", data);
 
     User.findOne({sessionid: sessionid}).exec((err, user) =>{
-        if(err || user === null){
+        if(err || user === null)
+        {
             console.error('this user is not authenticated');
             res.redirect('/login');
         }
-        else{
+        else
+        {
             Class.findOne({_id: classid}).exec((err, classdoc) => {
-                if(err){
+                if(err)
+                {
                     //handle error
-                }else{
-                    if(classdoc.userid == user._id){
+                }
+
+                else{
+
+                    if(classdoc.userid == user._id)
+                    {
                         classdoc.students.push(data);
-                        classdoc.save()
-                            .then( saveddoc => {
+                        classdoc.save().then( saveddoc => {
+
                                 console.log('Added a new student', saveddoc);
                                 res.redirect('back');
-                            })
-                            .catch(err => res.send(err));
+                            }).catch(err => res.send(err));
                     }
                 }
             });
