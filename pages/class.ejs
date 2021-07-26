@@ -44,7 +44,7 @@
     </div>
 
     <!-- Lesson form -->
-    
+
     <div class = "popupbg">
         <form id = "addLessonForm" method="POST" action="/addlesson/<%=_id %>" autocomplete="off">
 
@@ -82,6 +82,9 @@
 
         <div class = "lessons">
 
+            <% for (lesson of lessons) { %>
+                <div class = "lesson"><a href = "lesson.ejs"><%= lesson.lessonName %></a> </div>
+            <% } %>
             
 
         </div>
@@ -101,8 +104,6 @@
                 <% } %>
 
         </div>
-
-       
 
     </main>
     

@@ -49,9 +49,11 @@ const Student = Mongo.Schema(
 
 const Lesson = Mongo.Schema(
     {
-        name:String,
-        about:String,
-        present: [String]
+        lessonName:String,
+        chapter:String,
+        lessonPages: String,
+        lessonDate: String,
+        attendance: [String]
     }
 );
 const Class = Mongo.model("class", 
