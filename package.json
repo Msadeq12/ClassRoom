@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "sadeq",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "express-session": "*",
     "express-validator": "*",
     "fs-extra": "*",
+    "jest": "^27.0.6",
     "jquery": "^3.6.0",
     "mongoose": "*"
   }

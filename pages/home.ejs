@@ -7,6 +7,7 @@
     <!-- The Add Class form -->
 
     <div class = "add-class-bg">
+
             <form class = "add-class-form" action = "/addclass" method = "POST">
                 <h2>Create Class</h2>
 
@@ -22,11 +23,6 @@
                 <label for = "endDate">End Date</label>
                 <input required type = "date" name = "endDate">
 
-                <label for = "student">Add Student</label>
-                <textarea class = "add-student"></textarea>
-
-            
-
                 <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                     <button id="cancel-button">Cancel</button>
                     <button type="submit">Create</button>
@@ -35,24 +31,28 @@
             </form>
     </div>
 
-    <!-- Add Student Form -->
+    
     
     
     
     <%- include('header'); %>
+
     <main>
-        <h1>Welcome <%=name %></h1>
+        <h1>Welcome <%= name %></h1>
 
         <h2>Your classes</h2>
 
         <div class="classes">
-            <% for(let i = 0; i < classes.length; i++) { %>
-                <div class="class">
-                    <a href="class/<%=classes[i]._id %>"><h3><%=classes[i].className %></h3></a>
-                    <p>Level: <%=classes[i].level %></p>
-                    <p>Students: <%=classes[i].students.length %></p>
+            
+            <% for (var classes of classes) { %>
+                <div class = "class">
+                    <a href = "class/<%=classes._id %>"><h3><%=classes.className %></h3></a>
+                    <p>Level: <%=classes.level %></p>
+                    
                 </div>
+
             <% } %>
+            
 
             
                 <!-- <div class="class">
@@ -66,6 +66,9 @@
                     <p>Level: Basic</p>
                     <p>Students: 11</p>
                 </div> -->
+                
+
+                
 
                 <div id="add-class" class="class add">
                     <i class="fa fa-plus"></i> Add Class
@@ -79,9 +82,8 @@
     <script>
         const addClass = document.querySelector('#add-class');
         const addClassForm = document.querySelector('.add-class-bg');
-        const addStudent = document.querySelector(".add-student");
-        const Student = document.querySelector(".studentSpace");
-
+       
+       
         // the add class form event 
         addClass.addEventListener('click', e => {
             console.log('hi');
@@ -89,7 +91,7 @@
         });
 
         const cancelButton = document.querySelector('#cancel-button');
-        const cancel2 = document.querySelector("#student-cancel")
+        
 
         // add class form cancel button
         cancelButton.addEventListener('click', e => {
@@ -97,14 +99,7 @@
             addClassForm.style.display = "none";
         });
 
-        // add student cancel button
-        cancel2.addEventListener("click", e => {
-            e.preventDefault();
-            Student.style.display = "none";
-        });
-
-
-
+        
 
         window.addEventListener('click', e => {
             if (e.target == addClassForm)
@@ -113,10 +108,7 @@
             }
         });
 
-        // activates add student form
-        addStudent.addEventListener("click", e => {
-            Student.style.display = "flex";
-        })
+        
 
         
     </script>

@@ -48,10 +48,12 @@ const Student = Mongo.model("student",
 
     {
         className: String,
-        studentName: String,
-        age: String,
-        profession: String,
-        nationality: String
+        firstName: String,
+        lastName: String,
+        DOB: String,
+        address: String,
+        city: String,
+        country: String
 
     }
 
@@ -76,8 +78,8 @@ Website.get("/", (req,res) => {
 
         else
         {
-            Class.findOne({userid: user._id}, (err, docs) => {
-                console.log(docs);
+            Class.find({userid: user._id}, (err, docs) => {
+                console.log("docs: " + docs);
 
                 if (docs !== null)
                 {
@@ -102,12 +104,18 @@ Website.get('/signup', (req, res) => {
 });
 
 Website.get('/class/:id', (req, res) => {
-    console.log(req.params.id);
+    console.log(req.body.id);
     Class.findOne({_id: req.params.id}).exec((err, classDoc) => {
-        if(classDoc === null){
+        console.log(classDoc);
+
+        if(classDoc === null)
+        {
             res.status('404');
-        }else{
-            res.render('class', classDoc);
+        }
+
+        else
+        {
+            res.render('class', {myClass: classDoc} );
         }
     })
     
@@ -266,9 +274,29 @@ Website.post("/addclass", (req, res) => {
         });
     });
 
+});
 
+Website.post("/addStudent", (req,res) => {
+    
+    User.findOne({sessionid: req.cookies.SESSION_ID}).exec((err, user) => {
 
-})
+        const userID = user._id;
+
+        Class.find({userid: userID}, (err, myClass) => {
+            console.log("myClass:" + myClass);
+            const newStudent = new Student({className: myClass, firstName: req.body.firstName, lastName: req.body.lastName, 
+                DOB: req.body.DOB, address: req.body.address, city: req.body.city, country: req.body.country});
+            
+            newStudent.save().then(() => {
+                console.log("New student added !");
+                res.redirect("/class/:id");
+            })
+
+        })
+        
+        
+    });
+});
 
 Website.listen(1550, () => {
     console.log("Listening at 1550...");
