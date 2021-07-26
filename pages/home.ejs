@@ -6,8 +6,7 @@
 
     <!-- The Add Class form -->
 
-    <div class = "add-class-bg">
-
+    <div class = "popupbg">
             <form class = "add-class-form" action = "/addclass" method = "POST">
                 <h2>Create Class</h2>
 
@@ -22,6 +21,8 @@
 
                 <label for = "endDate">End Date</label>
                 <input required type = "date" name = "endDate">
+
+            
 
                 <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                     <button id="cancel-button">Cancel</button>
@@ -81,34 +82,29 @@
 
     <script>
         const addClass = document.querySelector('#add-class');
-        const addClassForm = document.querySelector('.add-class-bg');
-       
-       
+        const addClassForm = document.querySelector('.add-class-form');
+        const addStudent = document.querySelector(".add-student");
+        const Student = document.querySelector(".studentSpace");
+
         // the add class form event 
         addClass.addEventListener('click', e => {
             console.log('hi');
-            addClassForm.style.display = "flex";
+            addClassForm.parentElement.style.display = "flex";
         });
 
-        const cancelButton = document.querySelector('#cancel-button');
-        
 
-        // add class form cancel button
-        cancelButton.addEventListener('click', e => {
-            e.preventDefault();
-            addClassForm.style.display = "none";
+
+        const popupbg = document.querySelectorAll('.popupbg');
+
+        window.addEventListener('click', e=>{
+            popupbg.forEach(popup => {
+                if(e.target == popup){
+                    popup.style.display = "none";
+                }
+            });
         });
 
-        
 
-        window.addEventListener('click', e => {
-            if (e.target == addClassForm)
-            {
-                addClassForm.style.display = "none";
-            }
-        });
-
-        
 
         
     </script>

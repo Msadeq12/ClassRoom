@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title><%= myClass.className %> <%= myClass.level %> </title>
+    <title><%=className %> <%=level %></title>
     <link rel="stylesheet" href="/page.css">
     <link rel="stylesheet" href="/class.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,8 +11,10 @@
 <body>
     <%- include('header'); %>
 
-    <div class = "studentSpace">
-        <form id = "Student" action = "/addStudent" method = "POST">
+    <!-- Add Student Form -->
+
+    <div class = "popupbg">
+        <form id = "addStudentForm" method="POST" action="/addstudent/<%=_id %>">
 
             <h2>Add Student</h2>
 
@@ -38,8 +40,27 @@
                 <button id = "student-cancel">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
+        </form>
+    </div>
+
+    <div class = "popupbg">
+        <form id = "addLessonForm" method="POST" action="/addlesson/<%=_id %>" autocomplete="off">
+
+            <h2>Add Student</h2>
+
+            <label for = "name">Lesson Name</label>
+            <input type = "text" name = "name">
 
             
+
+            <label for = "DOB">Date of Birth</label>
+            <input type = "date" name = "DOB">
+
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                <button id = "student-cancel">Cancel</button>
+                <button type = "submit">Create</button>
+            </div>
         </form>
     </div>
 
@@ -47,17 +68,20 @@
         <h1><%= myClass.className %></h1> 
         <h1><%= myClass.level %></h1>  
         
-        <h3>Lessons</h3>
-
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
+        </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Students</h2> <i style="font-size: 1.3em; margin-left: 10px;" class = "fa fa-user-plus"></i>
+            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
         </div>
         
         <div class="students">
             
 
-            
+                <% for(let i = 0; i < students.length; i++) { %>
+                <div class="student"><span><%=students[i].firstName%> <%=students[i].lastName%></span> </div> 
+                <% } %>
 
         </div>
 
@@ -83,6 +107,36 @@
             Student.style.display = "flex";
         })
         
+        const addStudent = document.querySelector('#addStudent');
+        const addLesson = document.querySelector('#addLesson');
+
+        const addStudentForm = document.querySelector('#addStudentForm');
+        const addLessonForm = document.querySelector('#addLessonForm');
+        
+       
+        const popupbg = document.querySelectorAll('.popupbg');
+
+        
+       
+
+        addStudent.addEventListener("click", e => {
+            addStudentForm.parentElement.style.display = "flex";
+        });
+
+        addLesson.addEventListener('click', e=>{
+            addLessonForm.parentElement.style.display= "flex";
+            console.log('hello')
+        });
+
+
+        window.addEventListener('click', e=>{
+            popupbg.forEach(popup => {
+                if(e.target == popup){
+                    popup.style.display = "none";
+                }
+            });
+        })
+
     </script>
  
 </body>
