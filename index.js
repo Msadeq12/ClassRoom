@@ -119,7 +119,7 @@ Website.get('/class/:id', (req, res) => {
 
         else
         {
-            res.render('class', {myClass: classDoc} );
+            res.render('class', classDoc);
         }
     })
     

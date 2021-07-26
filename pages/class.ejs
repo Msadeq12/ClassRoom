@@ -65,8 +65,8 @@
     </div>
 
     <main>
-        <h1><%= myClass.className %></h1> 
-        <h1><%= myClass.level %></h1>  
+        <h1><%= className %></h1> 
+        <h1><%= level %></h1>  
         
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
@@ -91,21 +91,6 @@
     
     <script>
 
-        const addStudent = document.querySelector("i");
-        const cancel2 = document.querySelector("#student-cancel");
-        const Student = document.querySelector(".studentSpace");
-
-
-        // add student cancel button
-        cancel2.addEventListener("click", e => {
-            e.preventDefault();
-            Student.style.display = "none";
-        });
-
-        // activates add student form
-        addStudent.addEventListener("click", e => {
-            Student.style.display = "flex";
-        })
         
         const addStudent = document.querySelector('#addStudent');
         const addLesson = document.querySelector('#addLesson');
