@@ -108,10 +108,11 @@ Website.get('/signup', (req, res) => {
 
 Website.get('/class/:id', (req, res) => {
     console.log(req.body.id);
+
     Class.findOne({_id: req.params.id}).exec((err, classDoc) => {
         console.log(classDoc);
 
-        if(classDoc === null)
+        if (classDoc === null)
         {
             res.status('404');
         }
@@ -279,27 +280,7 @@ Website.post("/addclass", (req, res) => {
 
 });
 
-Website.post("/addStudent", (req,res) => {
-    
-    User.findOne({sessionid: req.cookies.SESSION_ID}).exec((err, user) => {
 
-        const userID = user._id;
-
-        Class.find({userid: userID}, (err, myClass) => {
-            console.log("myClass:" + myClass);
-            const newStudent = new Student({className: myClass, firstName: req.body.firstName, lastName: req.body.lastName, 
-                DOB: req.body.DOB, address: req.body.address, city: req.body.city, country: req.body.country});
-            
-            newStudent.save().then(() => {
-                console.log("New student added !");
-                res.redirect("/class/:id");
-            })
-
-        })
-        
-        
-    });
-});
 
 //Post request for adding a student to a class
 
