@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <head>
-
+    <link rel="stylesheet" href="/page.css">
 </head>
 
 <body>
-    <h1><%= firstName  %></h1>
+    <%- include('header'); %>
+    <main>
+        <h1><%= firstName  %> <%= lastName  %></h1>
+
+        <h2>Date of Birth: <%= DOB %></h2>
+
+        <h2>Address</h2>
+        <address>
+            <%= address %> <br>
+            <%= city %> <br>
+            <%= country %>
+            
+        </address>
+    </main>
+   
 </body>

@@ -167,6 +167,7 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
         if (classDoc !== null)
         {
             const studentDoc = classDoc.students.id(studentid);
+            console.log(studentDoc);
             res.render('student', studentDoc)
             
         }
