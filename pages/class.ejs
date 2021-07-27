@@ -83,7 +83,7 @@
         <div class = "lessons">
 
             <% for (lesson of lessons) { %>
-                <div class = "lesson"><a href = "lesson.ejs"><%= lesson.lessonName %></a> </div>
+                <div class = "lesson"><a href = "lesson/<%= lesson._id %>"><%= lesson.lessonName %></a> </div>
             <% } %>
             
 

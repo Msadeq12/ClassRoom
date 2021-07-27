@@ -56,6 +56,7 @@ const Lesson = Mongo.Schema(
         attendance: [String]
     }
 );
+
 const Class = Mongo.model("class", 
     {
         className: String,
@@ -108,6 +109,7 @@ Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// handles the class page
 Website.get('/class/:id', (req, res) => {
     console.log(req.body.id);
 
@@ -124,6 +126,29 @@ Website.get('/class/:id', (req, res) => {
             res.render('class', classDoc);
         }
     })
+    
+});
+
+// lesson page
+
+Website.get("/class/lesson/:id", (req, res) => {
+    
+    const lessonID = req.params.id;
+    
+    Class.findOne({lessons: { $elemMatch: {_id: lessonID} } }).exec((err, record) => {
+        console.log("record: " + record);
+        
+        if (record !== null)
+        {
+            res.render("lesson", record);
+            console.log({record: lessons});
+        }
+
+    });
+   
+    
+    
+      
     
 });
 
