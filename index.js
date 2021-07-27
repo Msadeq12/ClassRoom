@@ -155,6 +155,30 @@ Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
     
 });
 
+Website.get("/class/:classid/student/:studentid", (req, res) => {
+    const classid = req.params.classid;
+    const studentid = req.params.studentid;
+    
+    Class.findOne({_id: classid}).exec((err, classDoc) => {
+    
+        if(err){
+            console.error(err)
+        }
+        if (classDoc !== null)
+        {
+            const studentDoc = classDoc.students.id(studentid);
+            res.render('student', studentDoc)
+            
+        }
+
+    });
+   
+    
+    
+      
+    
+});
+
 //handle logout
 Website.get('/logout', (req, res) =>  {
     res.cookie('SESSION_ID', '', {maxAge: 1});
