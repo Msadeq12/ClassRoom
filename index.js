@@ -110,7 +110,7 @@ Website.get('/signup', (req, res) => {
 });
 
 // handles the class page
-Website.get('/class/:id', (req, res) => {
+Website.get('/class/:id/', (req, res) => {
     console.log(req.body.id);
 
     Class.findOne({_id: req.params.id}).exec((err, classDoc) => {
@@ -131,17 +131,20 @@ Website.get('/class/:id', (req, res) => {
 
 // lesson page
 
-Website.get("/class/lesson/:id", (req, res) => {
+Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
+    const classid = req.params.classid;
+    const lessonid = req.params.lessonid;
     
-    const lessonID = req.params.id;
+    Class.findOne({_id: classid}).exec((err, classDoc) => {
     
-    Class.findOne({lessons: { $elemMatch: {_id: lessonID} } }).exec((err, record) => {
-        console.log("record: " + record);
-        
-        if (record !== null)
+        if(err){
+            console.error(err)
+        }
+        if (classDoc !== null)
         {
-            res.render("lesson", record);
-            console.log({record: lessons});
+            const lessonDoc = classDoc.lessons.id(lessonid);
+            res.render('lesson', lessonDoc)
+            
         }
 
     });
