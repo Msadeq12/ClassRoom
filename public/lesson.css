@@ -1,0 +1,13 @@
+.student
+{
+    color: rgb(56, 56, 56);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.students
+{
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+}

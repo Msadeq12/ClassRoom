@@ -2,25 +2,34 @@
 
 
 <head>
-    <%= result.lessonName %>
+    <link rel="stylesheet" href="/page.css">
+    <link rel="stylesheet" href="/lesson.css">
+    <title><%= result.lessonName %></title>
 </head>
 
-<header>
-
-</header>
 
 <body>
+    <%- include('header'); %>
+    <main>
+        <h1><%= result.lessonName %></h1>
+        <small><%= result.lessonDate %></small>
 
-    <h1><%= result.lessonName %></h1>
-    <h2><%= result.chapter %></h2>
-    <h2><%= result.lessonPages %></h2>
-    <h2><%= result.lessonDate %></h2>
-
-    <% for (student of students) { %>
-
-        <h2><%= student.firstName %></h2>
+        <h2>Lesson Details</h2>
+        <p>Chapter: <%= result.chapter %> <br>
+            Pages: <%= result.lessonPages %></p>
+        
+        
+        <h2>Students</h2>
+        <div class="students">
+            <% for (student of students) { %>
     
-    <% } %>
+                <div class="student"><span><%= student.firstName %> <%= student.lastName %></span></div>
+            
+            <% } %>
+        </div>
+       
+    </main>
+    
 
 
     
