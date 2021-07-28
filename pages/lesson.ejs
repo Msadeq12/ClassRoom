@@ -20,15 +20,31 @@
         
         
         <h2>Students</h2>
+
+        <button type = "submit">OK</button>
+        
         <div class="students">
             <% for (student of students) { %>
     
-                <div class="student"><span><%= student.firstName %> <%= student.lastName %></span></div>
+                <div class="student"><span><%= student.firstName %> <%= student.lastName %></span><input type = "checkbox"></div>
             
             <% } %>
         </div>
+
+        <h2>Present</h2>
+
+        <div class = "present">
+
+        </div>
        
     </main>
+
+    <script>
+        var buttton = document.querySelector("button");
+        var presentStudents = document.querySelector(".present");
+        
+        
+    </script>
     
 
 
