@@ -1,0 +1,3 @@
+
+const sum = require("/script");
+
