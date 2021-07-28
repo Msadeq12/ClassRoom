@@ -2,7 +2,7 @@
 
 
 <head>
-    <%= lessonName %>
+    <%= result.lessonName %>
 </head>
 
 <header>
@@ -11,10 +11,16 @@
 
 <body>
 
-    <h1><%= lessonName %></h1>
-    <h2><%= chapter %></h2>
-    <h2><%= lessonPages %></h2>
-    <h2><%= lessonDate %></h2>
+    <h1><%= result.lessonName %></h1>
+    <h2><%= result.chapter %></h2>
+    <h2><%= result.lessonPages %></h2>
+    <h2><%= result.lessonDate %></h2>
+
+    <% for (student of students) { %>
+
+        <h2><%= student.firstName %></h2>
+    
+    <% } %>
 
 
     

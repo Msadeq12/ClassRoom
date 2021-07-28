@@ -136,13 +136,18 @@ Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
     
     Class.findOne({_id: classid}).exec((err, classDoc) => {
     
-        if(err){
+        if(err)
+        {
             console.error(err)
         }
+
         if (classDoc !== null)
         {
             const lessonDoc = classDoc.lessons.id(lessonid);
-            res.render('lesson', lessonDoc)
+            const students = classDoc.students;
+
+            console.log("students: " + students);
+            res.render('lesson', {result: lessonDoc, students: students});
             
         }
 
@@ -160,9 +165,11 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
     
     Class.findOne({_id: classid}).exec((err, classDoc) => {
     
-        if(err){
+        if(err)
+        {
             console.error(err)
         }
+
         if (classDoc !== null)
         {
             const studentDoc = classDoc.students.id(studentid);
