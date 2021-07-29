@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
 
-
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
 Website.use(cookieParser());
@@ -43,8 +42,7 @@ const Student = Mongo.Schema(
         address: String,
         city: String,
         country: String,
-        image: String,
-        document: String
+        image: String
 
     }
 
@@ -386,6 +384,12 @@ Website.post('/addstudent/:id', (req, res) => {
 
     const data = req.body;
 
+    var imageName = req.files.image.name;
+    var Image = req.files.image;
+    var path = "public/Student-photos/" + imageName;
+
+    data.image = Image.data;
+
     console.log('classid', classid);
     console.log('sessionid', sessionid)
 
@@ -402,7 +406,7 @@ Website.post('/addstudent/:id', (req, res) => {
             Class.findOne({_id: classid}).exec((err, classdoc) => {
                 if(err)
                 {
-                    //handle error
+                    console.log("Cannot find the class ...");
                 }
 
                 else{
@@ -410,6 +414,9 @@ Website.post('/addstudent/:id', (req, res) => {
                     if(classdoc.userid == user._id)
                     {
                         classdoc.students.push(data);
+                        
+                        //Image.mv(path, err => console.log("image-error: " + err));
+
                         classdoc.save().then( saveddoc => {
 
                                 console.log('Added a new student', saveddoc);
@@ -423,6 +430,8 @@ Website.post('/addstudent/:id', (req, res) => {
 
 });
 
+
+// adding a lesson to the class
 Website.post('/addlesson/:id', (req, res) =>{
     const classid = req.params.id;
     const sessionid = req.cookies.SESSION_ID;

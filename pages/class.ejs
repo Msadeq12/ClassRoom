@@ -14,7 +14,7 @@
     <!-- Add Student Form -->
 
     <div class = "popupbg">
-        <form id = "addStudentForm" method="POST" action="/addstudent/<%=_id %>">
+        <form id = "addStudentForm" method="POST" action="/addstudent/<%=_id %>" enctype = "multipart/form-data">
 
             <h2>Add Student</h2>
 
@@ -39,8 +39,6 @@
             <label for = "image">Passport Photo: </label>
             <input type = "file" name = "image">
 
-            <label for = "document">Attached Document</label>
-            <input type = "file" name = "document">
 
             <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                 <button id = "student-cancel">Cancel</button>

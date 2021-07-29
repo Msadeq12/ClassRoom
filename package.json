@@ -15,7 +15,7 @@
     "crypto": "*",
     "ejs": "*",
     "express": "*",
-    "express-fileupload": "*",
+    "express-fileupload": "^1.2.1",
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
