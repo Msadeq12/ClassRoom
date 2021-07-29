@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="/page.css">
+    <title><%= firstName  %> <%= lastName  %></title>
 </head>
 
-<body>
+<header>
+
     <%- include('header'); %>
+
+</header>
+
+<body>
+    
     <main>
-        <h1><%= firstName  %> <%= lastName  %></h1>
+        <div id = "info">
+            <h1><%= firstName  %> <%= lastName  %></h1>
 
-        <div>
-            <%= image. %>
-        </div> 
+            <h2>Date of Birth: <%= DOB %></h2>
 
-        <h2>Date of Birth: <%= DOB %></h2>
-
-        <h2>Address</h2><br>
-        <address>
-            <%= address %> <br>
-            <%= city %> <br>
-            <%= country %>
+            <h2>Address</h2><br>
+            <address>
+                <%= address %> <br>
+                <%= city %> <br>
+                <%= country %>
             
-        </address>
+            </address>
+
+        </div>
+        
+
+        <div id = "image">  
+            <img src = "/Student-photos/<%=image%>" width = "300" height = "250" alt = "pic" style>
+        </div>
+
     </main>
-   
+
+    
+
 </body>

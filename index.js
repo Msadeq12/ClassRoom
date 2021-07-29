@@ -7,6 +7,8 @@ const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
+const formidable = require("formidable");
+const { stringify } = require("querystring");
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
@@ -389,11 +391,11 @@ Website.post('/addstudent/:id', (req, res) => {
 
     const data = req.body;
 
-    var imageName = req.files.image.name;
+    const imageName = req.files.image.name;
     var Image = req.files.image;
     var path = "public/Student-photos/" + imageName;
-
-    data.image = Image.data;
+    
+    data.image = Image.name;
 
     console.log('classid', classid);
     console.log('sessionid', sessionid)
@@ -420,7 +422,7 @@ Website.post('/addstudent/:id', (req, res) => {
                     {
                         classdoc.students.push(data);
                         
-                        //Image.mv(path, err => console.log("image-error: " + err));
+                        Image.mv(path, err => console.log("image-error: " + err));
 
                         classdoc.save().then( saveddoc => {
 

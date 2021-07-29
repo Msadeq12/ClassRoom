@@ -19,6 +19,7 @@
     "express-messages": "*",
     "express-session": "*",
     "express-validator": "*",
+    "formidable": "^1.2.2",
     "fs-extra": "*",
     "jest": "^27.0.6",
     "jquery": "^3.6.0",
