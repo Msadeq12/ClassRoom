@@ -125,6 +125,7 @@ button{
 button:hover{
     background-color: rgb(147, 89, 255);
     transition: ease-in 100ms;
+    cursor: pointer;
 }
 button:active{
     border: none;
