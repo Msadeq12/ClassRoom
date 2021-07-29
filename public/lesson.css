@@ -1,6 +1,6 @@
 .student
 {
-    color: rgb(56, 56, 56);
+    
     display: flex;
     justify-content:space-between;
     padding: 20px;
@@ -8,6 +8,11 @@
 
 .students
 {
+    color: rgb(56, 56, 56);
     border-radius: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+}
+.absent{
+    background-color: rgb(247, 247, 247);
+    color: rgb(146, 146, 146);
 }

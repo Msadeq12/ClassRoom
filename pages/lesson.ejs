@@ -11,6 +11,7 @@
 <body>
     <%- include('header'); %>
     <main>
+
         <h1><%= result.lessonName %></h1>
         <small><%= result.lessonDate %></small>
 
@@ -19,23 +20,47 @@
             Pages: <%= result.lessonPages %></p>
         
         
-        <h2>Students</h2>
-
-        <button type = "submit">OK</button>
         
-        <div class="students">
-            <% for (student of students) { %>
-    
-                <div class="student"><span><%= student.firstName %> <%= student.lastName %></span><input type = "checkbox"></div>
+
+        <% if(result.attendance.length === 0){ %>
+            <%= result.attendance %>
+            <h2>Take Attendance</h2>
+            <form method="post">
+                <div class="students">
+                    <% for (student of students) { %>
             
-            <% } %>
-        </div>
+                        <div class="student"><span><%= student.firstName %> <%= student.lastName %></span><input name="<%= student._id %>" type = "checkbox"></div>
+                    
+                    <% } %>
+                </div>
+                <div style="display: flex; justify-content: flex-end;"><button type = "submit">OK</button></div>
+                
+            </form>
+        <% } else { %>
+            <h2>Present</h2>
 
-        <h2>Present</h2>
+            <div class = "students">
+                <% for (student of attendance) { %>
+                    
+                    <div class="student"><span><%= student.firstName %> <%= student.lastName %></span></div>
+                
+                <% } %>
+            </div>
 
-        <div class = "present">
+            <h2>Absent</h2>
 
-        </div>
+            <div class="students absent">
+                <% for(student of students){ %>
+                    
+                        <% if (!attendance.includes(student)) { %>
+                            <div class="student"><span><%= student.firstName %> <%= student.lastName %></span></div>
+                        <% } %>
+                <% } %>
+            </div>
+        <% } %>
+       
+
+       
        
     </main>
 

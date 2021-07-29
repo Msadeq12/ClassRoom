@@ -22,9 +22,12 @@ h1 {
 h2{
     font-weight: 400;
     margin-bottom: 0;
-    color: #636363;
+    color: #242424;
 }
 
+p {
+    margin: 0;
+}
 nav{    
     font: 1.2rem;
     padding: 20px;
@@ -103,5 +106,26 @@ input{
     font-size: 1.2em;
     margin: 10px 0;
 }
-
+button{
+    margin: 1em 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: white;
+    padding: 0.7em 2em;
+    background-color: rgb(135, 71, 255);
+    border: none;
+    box-shadow: 0 0.5em 0 rgb(88, 45, 168);
+    border-radius: 1em;
+   
+}
+button:hover{
+    background-color: rgb(147, 89, 255);
+    transition: ease-in 100ms;
+}
+button:active{
+    border: none;
+    box-shadow: none;
+    transform: translateY(0.5em);
+    transition: none;
+}
 /* div space for add student form (following the same styles) */

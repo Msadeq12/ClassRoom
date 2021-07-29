@@ -146,8 +146,13 @@ Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
             const lessonDoc = classDoc.lessons.id(lessonid);
             const students = classDoc.students;
 
-            console.log("students: " + students);
-            res.render('lesson', {result: lessonDoc, students: students});
+            console.log(lessonDoc);
+            let attendance = [];
+            let absent = [];
+            for (studentid of lessonDoc.attendance){
+                attendance.push(students.id(studentid));
+            }
+            res.render('lesson', {result: lessonDoc, students: students, attendance: attendance, absent: absent});
             
         }
 
@@ -419,6 +424,7 @@ Website.post('/addstudent/:id', (req, res) => {
 
 });
 
+// Post request for creating a lesson record.
 Website.post('/addlesson/:id', (req, res) =>{
     const classid = req.params.id;
     const sessionid = req.cookies.SESSION_ID;
@@ -453,6 +459,35 @@ Website.post('/addlesson/:id', (req, res) =>{
             });
         }
     });
+
+});
+
+//Post request for handling attendance
+Website.post("/class/:classid/lesson/:lessonid", (req, res) => {
+    const classid = req.params.classid;
+    const lessonid = req.params.lessonid;
+    
+    console.log(req.body);
+
+    Class.findOne({_id: classid}).exec((err, classDoc) => {
+        const lessonDoc = classDoc.lessons.id(lessonid);
+        
+        for (const studentid in req.body){
+            
+            if (classDoc.students.id(studentid)){
+                lessonDoc.attendance.push(studentid);
+            }
+        }
+        classDoc.save().then((err, savedDoc) => {
+            if(err){
+                console.error(err);
+            }
+            res.redirect('back')
+        });
+
+    })
+    
+   
 
 });
 
