@@ -6,12 +6,14 @@ const { urlencoded } = require("body-parser");
 const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
+const fileUploader = require("express-fileupload");
 
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
 Website.use(cookieParser());
 Website.use(express.static("public"));
+Website.use(fileUploader());
 
 Website.set("views", "pages");
 Website.set("view engine", "ejs");
@@ -40,7 +42,9 @@ const Student = Mongo.Schema(
         DOB: String,
         address: String,
         city: String,
-        country: String
+        country: String,
+        image: String,
+        document: String
 
     }
 
