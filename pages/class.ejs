@@ -40,7 +40,7 @@
             <input type = "file" name = "image">
 
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 15px;">
                 <button id = "student-cancel">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
@@ -67,7 +67,7 @@
             <input type = "date" name = "lessonDate">
 
             
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+            <div style="display: flex; justify-content: flex-end; gap:12px; margin-top: 15px;">
                 <button id = "student-cancel">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
@@ -79,7 +79,7 @@
         <h1><%= level %></h1>  
         
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
+            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em;" class="fa fa-plus"></i></button>
         </div>
 
         <!-- List of lessons in this class -->
@@ -95,7 +95,7 @@
         
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
+            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em;" class="fa fa-user-plus"></i></button>
         </div>
         
         <!-- List of students of the class -->
@@ -104,7 +104,7 @@
             
 
                 <% for (student of students) { %>
-                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a>"</div> 
+                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a></div> 
                 <% } %>
 
         </div>
