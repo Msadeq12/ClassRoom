@@ -53,8 +53,7 @@ const Student = Mongo.Schema(
 const Lesson = Mongo.Schema(
     {
         lessonName:String,
-        chapter:String,
-        lessonPages: String,
+        textarea: String,
         lessonDate: String,
         attendance: [String]
     }

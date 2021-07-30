@@ -16,3 +16,7 @@
     background-color: rgb(247, 247, 247);
     color: rgb(146, 146, 146);
 }
+
+#textarea {
+   white-space: pre-wrap;
+}
