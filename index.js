@@ -44,8 +44,10 @@ const Student = Mongo.Schema(
         address: String,
         city: String,
         country: String,
-        image: String
-
+        image: {
+            data: Buffer,
+            mimetype: String
+        }
     }
 
 );
@@ -389,12 +391,18 @@ Website.post('/addstudent/:id', (req, res) => {
     const sessionid = req.cookies.SESSION_ID;
 
     const data = req.body;
-
-    const imageName = req.files.image.name;
     var Image = req.files.image;
-    var path = "public/Student-photos/" + imageName;
+
+    //const imageName = req.files.image.name;
     
-    data.image = Image.name;
+    //var path = "public/Student-photos/" + imageName;
+    
+    const necessaryImgData = {
+        data: Image.data,
+        mimetype: Image.mimetype
+    }
+
+    data.image = necessaryImgData;
 
     console.log('classid', classid);
     console.log('sessionid', sessionid)
@@ -421,7 +429,7 @@ Website.post('/addstudent/:id', (req, res) => {
                     {
                         classdoc.students.push(data);
                         
-                        Image.mv(path, err => console.log("image-error: " + err));
+                        //Image.mv(path, err => console.log("image-error: " + err));
 
                         classdoc.save().then( saveddoc => {
 
