@@ -31,11 +31,7 @@
         
 
         <div id = "image">  
-            <img src = "/Student-photos/<%=student.image%>" width = "300" alt = "pic" style>
-        </div>
-
-        <div>
-            
+            <img src = "data:<%= image.mimetype %>;base64, <%= image.data.toString('base64') %>  " width = "300" alt = "pic" style>
         </div>
 
     </main>
