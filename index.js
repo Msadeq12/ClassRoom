@@ -167,6 +167,8 @@ Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
     
 });
 
+//student page
+
 Website.get("/class/:classid/student/:studentid", (req, res) => {
     const classid = req.params.classid;
     const studentid = req.params.studentid;
@@ -181,8 +183,18 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
         if (classDoc !== null)
         {
             const studentDoc = classDoc.students.id(studentid);
+            let lessons = classDoc.lessons;
+
+            let attendance = [];
+
+            for (lesson of lessons)
+            {
+                attendance.push(lesson.attendance);
+            }
+
             console.log(studentDoc);
-            res.render('student', studentDoc)
+            console.log("dates: " + attendance);
+            res.render('student', {student: studentDoc, attendance: attendance})
             
         }
 

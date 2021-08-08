@@ -2,7 +2,7 @@
 <head>
     <link rel="stylesheet" href="/page.css">
     <link rel="stylesheet" href = "/student.css">
-    <title><%= firstName  %> <%= lastName  %></title>
+    <title><%= student.firstName  %> <%= student.lastName  %></title>
 </head>
 
 <header>
@@ -15,15 +15,15 @@
     
     <main>
         <div id = "info">
-            <h1><%= firstName  %> <%= lastName  %></h1>
+            <h1><%= student.firstName  %> <%= student.lastName  %></h1>
 
-            <h2>Date of Birth: <%= DOB %></h2>
+            <h2>Date of Birth: <%= student.DOB %></h2>
 
             <h2>Address</h2><br>
             <address>
-                <%= address %> <br>
-                <%= city %> <br>
-                <%= country %>
+                <%= student.address %> <br>
+                <%= student.city %> <br>
+                <%= student.country %>
             
             </address>
 
@@ -31,7 +31,11 @@
         
 
         <div id = "image">  
-            <img src = "/Student-photos/<%=image%>" width = "300" alt = "pic" style>
+            <img src = "/Student-photos/<%=student.image%>" width = "300" alt = "pic" style>
+        </div>
+
+        <div>
+            
         </div>
 
     </main>
