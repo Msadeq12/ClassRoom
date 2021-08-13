@@ -13,6 +13,8 @@
     "connect-flash": "*",
     "cookie-parser": "^1.4.5",
     "crypto": "*",
+    "custom-env": "^2.0.1",
+    "dotenv": "^10.0.0",
     "ejs": "*",
     "express": "*",
     "express-fileupload": "^1.2.1",

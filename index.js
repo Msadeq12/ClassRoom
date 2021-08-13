@@ -8,13 +8,25 @@ const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
 const formidable = require("formidable");
-const { stringify } = require("querystring");
+
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
 Website.use(cookieParser());
 Website.use(express.static("public"));
 Website.use(fileUploader());
+var result = require("dotenv").config();
+
+if (result.error)
+{
+    console.log("ENV Error: " + result.error);
+}
+
+else
+{
+    console.log("ENV: " + process.env.EMAIL);
+    console.log("ENV: " + process.env.PASS);
+}
 
 Website.set("views", "pages");
 Website.set("view engine", "ejs");
@@ -202,10 +214,6 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
 
     });
    
-    
-    
-      
-    
 });
 
 //handle logout
@@ -274,35 +282,39 @@ Website.post('/signup', [
                     console.log('new user created');
                     res.cookie("SESSION_ID", sessionid, {httpOnly:true});
 
-                    // var transporter = nodemailer.createTransport({
-                    //     host: "smtp.gmail.com",
-                    //     port: "465",
-                    //     auth:
-                    //     {
-                    //         user: "",
-                    //         pass: ""
-                    //     }
-                    // });
+                    // nodemailer for email confirmations 
+                    
+                    var transporter = nodemailer.createTransport({
+                        host: "smtp.gmail.com",
+                        port: "465",
+                        service: "gmail",
+                        secure: true,
+                        auth:
+                        {
+                            user: process.env.EMAIL, 
+                            pass: process.env.PASS
+                        }
+                    });
 
-                    // var mailOptions = {
-                    //     from: "mohammadsadeq1214@gmail.com",
-                    //     to: email,
-                    //     subject: "Confirmation Email !",
-                    //     text: "You have created an account with us. Congratulations !"
-                    // }
+                    var mailOptions = {
+                        from: process.env.EMAIL,
+                        to: email,
+                        subject: "Confirmation Email !",
+                        text: `"You have created an account with us. Congratulations ! \n\nRegards, ClassRoom Team"`
+                    }
 
-                    // transporter.sendMail(mailOptions, (err, info) => {
-                    //     if (err)
-                    //     {
-                    //         console.log(err);
-                    //     }
+                    transporter.sendMail(mailOptions, (err, info) => {
+                        if (err)
+                        {
+                            console.log(err);
+                        }
 
-                    //     else
-                    //     {
-                    //         console.log("Email sent: " + info.response);
+                        else
+                        {
+                            console.log("Email sent: " + info.response);
 
-                    //     }
-                    // });
+                        }
+                    });
 
                     res.redirect("/");
                 });
