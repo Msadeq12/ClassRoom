@@ -25,13 +25,20 @@
                 <%= student.city %> <br>
                 <%= student.country %>
             
-            </address>
+            </address><br><br>
 
+            <h2>Attendance</h2><br>
+            
+            <div id = "attendance">
+                <i><%= attendance %>%</i>
+            </div>
+            
+                    
         </div>
         
 
         <div id = "image">  
-            <img src = "data:<%= image.mimetype %>;base64, <%= image.data.toString('base64') %>  " width = "300" alt = "pic" style>
+            <img src = "data:<%= student.image.mimetype %>;base64, <%= student.image.data.toString('base64') %>  " width = "300" alt = "pic" style>
         </div>
 
     </main>

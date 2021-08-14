@@ -10,3 +10,10 @@ main {
     padding: 4em 0;
 }
 
+#attendance {
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+    
+}
+

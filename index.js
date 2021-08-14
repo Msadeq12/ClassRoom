@@ -198,17 +198,33 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
         {
             const studentDoc = classDoc.students.id(studentid);
             let lessons = classDoc.lessons;
+            let lessonQuantity = classDoc.lessons.length;
 
-            let attendance = [];
+            // student attendance percentage 
+            let totalAttendance = [];
+            let counter = 0;
+            let attendancePercentage = 0;
 
             for (lesson of lessons)
             {
-                attendance.push(lesson.attendance);
+                totalAttendance.push(lesson.attendance);
+            }
+
+            for (i of totalAttendance)
+            {
+                if (studentid == i)
+                {
+                    counter += 1;
+                    attendancePercentage = (counter / lessonQuantity) * 100; 
+
+                }
             }
 
             console.log(studentDoc);
-            console.log("dates: " + attendance);
-            res.render('student', {student: studentDoc, attendance: attendance})
+            console.log("Student ID: " + studentid);
+            console.log("Student Attendance: " + attendancePercentage);
+            console.log("Total Attendance: " + totalAttendance);
+            res.render('student', {student: studentDoc, attendance: attendancePercentage});
             
         }
 
@@ -283,7 +299,7 @@ Website.post('/signup', [
                     res.cookie("SESSION_ID", sessionid, {httpOnly:true});
 
                     // nodemailer for email confirmations 
-                    
+
                     var transporter = nodemailer.createTransport({
                         host: "smtp.gmail.com",
                         port: "465",
@@ -300,7 +316,7 @@ Website.post('/signup', [
                         from: process.env.EMAIL,
                         to: email,
                         subject: "Confirmation Email !",
-                        text: `"You have created an account with us. Congratulations ! \n\nRegards, ClassRoom Team"`
+                        text: `You have created an account with us. Congratulations! \n\nRegards,\n\n ClassRoom Team`
                     }
 
                     transporter.sendMail(mailOptions, (err, info) => {
