@@ -9,7 +9,6 @@ const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
 const formidable = require("formidable");
 
-
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
 Website.use(cookieParser());
@@ -22,16 +21,10 @@ if (result.error)
     console.log("ENV Error: " + result.error);
 }
 
-else
-{
-    console.log("ENV: " + process.env.EMAIL);
-    console.log("ENV: " + process.env.PASS);
-}
-
 Website.set("views", "pages");
 Website.set("view engine", "ejs");
 
-Mongo.connect("mongodb://localhost:27017/ClassRoom",
+Mongo.connect(process.env.URL,
     {useNewUrlParser: true},
     () => console.log("connected to ClassRoom DB...")
 );
