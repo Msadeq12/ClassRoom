@@ -161,6 +161,7 @@ Website.get("/class/:classid/lesson/:lessonid", (req, res) => {
             console.log(lessonDoc);
             let attendance = [];
             let absent = [];
+
             for (studentid of lessonDoc.attendance){
                 attendance.push(students.id(studentid));
             }
@@ -192,13 +193,15 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
         if (classDoc !== null)
         {
             const studentDoc = classDoc.students.id(studentid);
+            let studentID = classDoc.students;
             let lessons = classDoc.lessons;
             let lessonQuantity = classDoc.lessons.length;
 
             // student attendance percentage 
-            let totalAttendance = [];
-            let counter = 0;
+            var totalAttendance = {};
             let attendancePercentage = 0;
+            var counter = 0;
+            
 
             for (lesson of lessons)
             {
@@ -217,10 +220,16 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
             }
             attendancePercentage = (counter / lessonQuantity) * 100; 
 
+            
+            
+            attendancePercentage = (counter / lessonQuantity) * 100; 
+
             console.log(studentDoc);
             console.log("Student ID: " + studentid);
             console.log("Student Attendance: " + attendancePercentage);
-            console.log("Total Attendance: " + totalAttendance);
+            console.log("Lesson Quantity: " + lessonQuantity);
+            console.log("Counter " + counter);
+
             res.render('student', {student: studentDoc, attendance: attendancePercentage});
             
         }
