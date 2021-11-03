@@ -40,8 +40,8 @@
             <input type = "file" name = "image">
 
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                <button id = "student-cancel">Cancel</button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px; gap: 10px;">
+                <button id ="student-cancel" class="cancel-button" type="button">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
         </form>
@@ -64,8 +64,8 @@
             <input type = "date" name = "lessonDate">
 
             
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                <button id = "student-cancel">Cancel</button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px; gap: 10px;">
+                <button id = "lesson-cancel" class="cancel-button" type="button">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
         </form>
@@ -101,7 +101,7 @@
             
 
                 <% for (student of students) { %>
-                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a>"</div> 
+                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a></div> 
                 <% } %>
 
         </div>
@@ -119,6 +119,7 @@
         
        
         const popupbg = document.querySelectorAll('.popupbg');
+        const cancelButtons = document.querySelectorAll('.cancel-button');
 
         addStudent.addEventListener("click", e => {
             addStudentForm.parentElement.style.display = "flex";
@@ -129,7 +130,13 @@
             console.log('hello')
         });
 
-
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                console.log('wtf');
+                e.target.parentElement.parentElement.parentElement.style.display = 'none';
+            });
+        });
+        
         window.addEventListener('click', e=>{
             popupbg.forEach(popup => {
                 if(e.target == popup){
