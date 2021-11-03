@@ -21,6 +21,8 @@ if (result.error)
     console.log("ENV Error: " + result.error);
 }
 
+const port = process.env.PORT || 3000;
+
 Website.set("views", "pages");
 Website.set("view engine", "ejs");
 
@@ -200,7 +202,9 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
 
             for (lesson of lessons)
             {
-                totalAttendance.push(lesson.attendance);
+                for(attendance of lesson.attendance){
+                    totalAttendance.push(attendance);
+                }
             }
 
             for (i of totalAttendance)
@@ -208,10 +212,10 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
                 if (studentid == i)
                 {
                     counter += 1;
-                    attendancePercentage = (counter / lessonQuantity) * 100; 
 
                 }
             }
+            attendancePercentage = (counter / lessonQuantity) * 100; 
 
             console.log(studentDoc);
             console.log("Student ID: " + studentid);
@@ -544,8 +548,8 @@ Website.post("/class/:classid/lesson/:lessonid", (req, res) => {
 
 });
 
-Website.listen(1550, () => {
-    console.log("Listening at 1550...");
+Website.listen(port, () => {
+    console.log("Listening at ", port);
 });
 
 //this function generates a random string which is the session id for a partcular user.
