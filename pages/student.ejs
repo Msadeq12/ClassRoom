@@ -33,16 +33,23 @@
                 <i><%= attendance %>%</i>
             </div>
             
-                    
+            <button type="submit" onclick="deleteStudentRecord()">Delete Student Record</button>  
+                  
         </div>
-        
 
         <div id = "image">  
             <img src = "data:<%= student.image.mimetype %>;base64, <%= student.image.data.toString('base64') %>  " width = "300" alt = "pic" style>
         </div>
 
     </main>
-
-    
+    <script>
+        async function deleteStudentRecord(){
+            console.log('hi got here');
+            const res = await fetch(window.location.href, {
+                method:'DELETE',
+            });
+            location.reload();
+        }
+    </script>
 
 </body>

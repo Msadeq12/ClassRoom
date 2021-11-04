@@ -129,7 +129,6 @@ Website.get('/login', (req, res) => {
 Website.get('/class/:id/',authenticate, (req, res) => {
 
     Class.findOne({_id: req.params.id, userid: req.user._id}).exec((err, classDoc) => {
-        console.log(classDoc);
 
         if (classDoc === null)
         {
@@ -140,7 +139,7 @@ Website.get('/class/:id/',authenticate, (req, res) => {
         }
 
     
-        console.log(classDoc);
+        // console.log(classDoc);
         res.render('class', classDoc);
         
     })
@@ -200,6 +199,9 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
         if (classDoc !== null)
         {
             const studentDoc = classDoc.students.id(studentid);
+            if(!studentDoc){
+                res.redirect(`/class/${classid}/`);
+            }
             let studentID = classDoc.students;
             let lessons = classDoc.lessons;
             let lessonQuantity = classDoc.lessons.length;
@@ -229,11 +231,11 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
 
             
 
-            console.log(studentDoc);
+          /*   console.log(studentDoc);
             console.log("Student ID: " + studentid);
             console.log("Student Attendance: " + attendancePercentage);
             console.log("Lesson Quantity: " + lessonQuantity);
-            console.log("Counter " + counter);
+            console.log("Counter " + counter); */
 
             res.render('student', {student: studentDoc, attendance: attendancePercentage});
             
@@ -450,9 +452,9 @@ Website.post('/addstudent/:id', authenticate, (req, res) => {
 
     data.image = necessaryImgData;
 
-    console.log('classid', classid);
+    // console.log('classid', classid);
 
-    console.log("Data", data);
+    // console.log("Data", data);
 
     Class.findOne({_id: classid, userid: req.user._id}).exec((err, classdoc) => {
         if(err)
@@ -467,7 +469,7 @@ Website.post('/addstudent/:id', authenticate, (req, res) => {
 
         classdoc.save()
             .then(saveddoc => {
-                console.log('Added a new student', saveddoc);
+                // console.log('Added a new student', saveddoc);
                 res.redirect('back');
             })
             .catch(err => res.send(err));
@@ -533,6 +535,23 @@ Website.post("/class/:classid/lesson/:lessonid",authenticate, (req, res) => {
     
    
 
+});
+Website.delete('/class/:classid/student/:studentid', authenticate, (req, res) => {
+    
+    Class.findOne({_id:req.params.classid, userid: req.user._id}).exec((err, classDoc)=>{
+        const studentDoc = classDoc.students.id(req.params.studentid);
+        studentDoc.remove();
+        
+        classDoc.save().then((err, savedDoc) => {
+            console.log('did we get here? that is the question. ')
+     
+            console.log('removed student sucessfully')
+            res.send('removed student successfully');
+            
+        });
+    });
+    
+    
 });
 
 Website.listen(port, () => {
