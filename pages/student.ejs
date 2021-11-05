@@ -28,6 +28,20 @@
             </address><br><br>
 
             <h2>Attendance</h2><br>
+
+            <div style="display:table">
+                <% for (lesson of attendanceArray) { %>
+                    <div style="display:table-row">
+                        <p style="display: table-cell;"><%= lesson.lessonName %></p>
+                        <% if (lesson.present) { %>
+                            ✔️
+                        <% } else { %>
+                            ❌
+                        <% } %>
+                         
+                    </div>
+                <% } %>
+            </div>
             
             <div id = "attendance">
                 <i><%= attendance %>%</i>
@@ -42,6 +56,9 @@
         </div>
 
     </main>
+
+    
+    
     <script>
         async function deleteStudentRecord(){
             console.log('hi got here');

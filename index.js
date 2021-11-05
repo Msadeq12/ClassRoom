@@ -208,27 +208,25 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
             let lessonQuantity = classDoc.lessons.length;
 
             // student attendance percentage 
-            var totalAttendance = [];
             let attendancePercentage = 0;
             var counter = 0;
             
+            
 
-            for (lesson of lessons)
-            {
+            const attendanceArray = lessons.map(lesson => {
                 for(attendance of lesson.attendance){
-                    totalAttendance.push(attendance);
+                    if (studentid == attendance)
+                    {
+                        counter += 1;
+                        return {lessonName: lesson.lessonName,lessonDate:lesson.lessonDate, present: true};
+    
+                    }else{
+                        return {lessonName: lesson.lessonName,lessonDate: lesson.lessonDate, present: false};
+                    }
                 }
-            }
+            });
 
-            for (i of totalAttendance)
-            {
-                if (studentid == i)
-                {
-                    counter += 1;
-
-                }
-            }
-            attendancePercentage = (counter / lessonQuantity) * 100; 
+            attendancePercentage = Math.round((counter / lessonQuantity) * 100); 
 
             
 
@@ -238,7 +236,7 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
             console.log("Lesson Quantity: " + lessonQuantity);
             console.log("Counter " + counter); */
 
-            res.render('student', {student: studentDoc, attendance: attendancePercentage});
+            res.render('student', {student: studentDoc, attendance: attendancePercentage, attendanceArray: attendanceArray});
             
         }
 
