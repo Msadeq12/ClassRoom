@@ -110,6 +110,35 @@
 
         </div>
 
+        <div class="section-header">
+            <h2>Attendance at a glance</h2>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <% for(lesson of lessons) { %>
+                        <th><%= lesson.lessonName %> </th>
+                    <% } %> 
+                </tr>
+               
+            </thead>
+            
+            <% for(student of students) { %>
+                <tr>
+                    <th><%=student.firstName %> <%=student.lastName %></th>
+                    <% for(lesson of lessons) { %>
+                        <% if (lesson.attendance.includes(student._id)) { %>
+                            <td>✔️</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %> 
+                    <% } %>
+                </tr>
+            <% } %>
+            
+        </table>
     </main>
     
     <script>

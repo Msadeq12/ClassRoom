@@ -30,7 +30,7 @@ h2
 .students
 {
     border-radius: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 i
@@ -92,4 +92,22 @@ details[open] {
 details[open] summary {
     border-bottom: 1px solid #aaa;
     margin-bottom: .5em;
+}
+
+table{
+    color: #3f3f3f;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius:8px;
+    border-collapse: collapse;
+
+}
+tr,th{
+    text-align: center;
+    padding: 0.5em;
+}
+
+thead th{
+    border-bottom: 1px solid #aaa;
 }

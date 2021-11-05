@@ -214,8 +214,8 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
             
 
             const attendanceArray = lessons.map(lesson => {
-                for(attendance of lesson.attendance){
-                    if (studentid == attendance)
+                
+                    if (lesson.attendance.includes(studentDoc._id))
                     {
                         counter += 1;
                         return {lessonName: lesson.lessonName,lessonDate:lesson.lessonDate, present: true};
@@ -223,7 +223,7 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
                     }else{
                         return {lessonName: lesson.lessonName,lessonDate: lesson.lessonDate, present: false};
                     }
-                }
+                
             });
 
             attendancePercentage = Math.round((counter / lessonQuantity) * 100); 
