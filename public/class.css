@@ -48,3 +48,48 @@ form{
     border-radius: 10px;
     box-shadow: rgba(110, 110, 110, 0.2) 0px 7px 9px 0px;
 }
+
+.section-header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 2px solid rgb(135, 71, 255);
+}
+.section-header>h2{
+    margin: 10px 0;
+}
+.icon-button{
+    padding: 0;
+    background:none;
+    color: rgb(135, 71, 255);
+    box-shadow: none;
+}
+.icon-button:hover{
+    color: rgb(147, 89, 255);
+    background:none;
+}
+.icon-button:active{
+    transform: none;
+}
+
+details {
+    color: #3f3f3f;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+}
+
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}

@@ -75,8 +75,8 @@
         <h1><%= className %></h1> 
         <h1><%= level %></h1>  
         
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
+        <div class="section-header">
+            <h2>Lessons</h2> <button style="font-size:1.5em" id="addLesson" class="icon-button"><i class="fa fa-plus fa-fw"></i></button>
         </div>
 
         <!-- List of lessons in this class -->
@@ -84,15 +84,19 @@
         <div class = "lessons">
 
             <% for (lesson of lessons) { %>
-                <div class = "lesson"><a href = "lesson/<%= lesson._id %>"><%= lesson.lessonName %></a> </div>
+                <details>
+                    <summary><%= lesson.lessonName %></summary>
+                    <p><%= lesson.textarea %></p>
+                    <a href = "lesson/<%= lesson._id %>">Go to lesson</a> 
+                </details>
             <% } %>
             
 
         </div>
         
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
+        <div class="section-header">
+            <h2>Students</h2> <button style="font-size:1.5em" id="addStudent" class="icon-button"><i class="fa fa-user-plus fa-fw"></i></button>
         </div>
         
         <!-- List of students of the class -->
