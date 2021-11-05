@@ -169,7 +169,8 @@ Website.get("/class/:classid/lesson/:lessonid", authenticate, (req, res) => {
             let absent = [];
 
             for (studentid of lessonDoc.attendance){
-                attendance.push(students.id(studentid));
+                if(students.id(studentid))
+                    attendance.push(students.id(studentid));
             }
             res.render('lesson', {result: lessonDoc, students: students, attendance: attendance, absent: absent});
             
