@@ -7,7 +7,7 @@ const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
-const formidable = require("formidable");
+const bootstrap = require('bootstrap');
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
@@ -93,7 +93,7 @@ Website.get("/", (req,res) => {
             
             console.log(user);
             
-            res.render("login");
+            res.render("intro");
             
         }
 
@@ -116,6 +116,10 @@ Website.get("/", (req,res) => {
 
 Website.get('/signup', (req, res) => {
     res.render('signup');
+});
+
+Website.get('/login', (req, res) => {
+    res.render("login");
 });
 
 // handles the class page
@@ -196,7 +200,6 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
             let lessonQuantity = classDoc.lessons.length;
 
             // student attendance percentage 
-            var totalAttendance = {};
             let attendancePercentage = 0;
             var counter = 0;
             
@@ -211,9 +214,7 @@ Website.get("/class/:classid/student/:studentid", (req, res) => {
                     }
                 }
             }
-
-            
-            
+     
             attendancePercentage = (counter / lessonQuantity) * 100; 
 
             console.log(studentDoc);

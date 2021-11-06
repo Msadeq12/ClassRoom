@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "*",
+    "bootstrap": "^5.1.3",
     "connect-flash": "*",
     "cookie-parser": "^1.4.5",
     "crypto": "*",
