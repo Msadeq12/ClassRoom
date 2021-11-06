@@ -7,7 +7,7 @@ const {check, validationResult} = require("express-validator");
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
 const fileUploader = require("express-fileupload");
-const bootstrap = require('bootstrap');
+
 
 const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
