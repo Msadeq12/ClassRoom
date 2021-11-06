@@ -40,8 +40,8 @@
             <input type = "file" name = "image">
 
 
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                <button id = "student-cancel">Cancel</button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px; gap: 10px;">
+                <button id ="student-cancel" class="cancel-button" type="button">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
         </form>
@@ -64,8 +64,8 @@
             <input type = "date" name = "lessonDate">
 
             
-            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                <button id = "student-cancel">Cancel</button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px; gap: 10px;">
+                <button id = "lesson-cancel" class="cancel-button" type="button">Cancel</button>
                 <button type = "submit">Create</button>
             </div>
         </form>
@@ -75,8 +75,8 @@
         <h1><%= className %></h1> 
         <h1><%= level %></h1>  
         
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Lessons</h2> <button id="addLesson"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-plus"></i></button>
+        <div class="section-header">
+            <h2>Lessons</h2> <button style="font-size:1.5em" id="addLesson" class="icon-button"><i class="fa fa-plus fa-fw"></i></button>
         </div>
 
         <!-- List of lessons in this class -->
@@ -84,15 +84,19 @@
         <div class = "lessons">
 
             <% for (lesson of lessons) { %>
-                <div class = "lesson"><a href = "lesson/<%= lesson._id %>"><%= lesson.lessonName %></a> </div>
+                <details>
+                    <summary><%= lesson.lessonName %></summary>
+                    <p><%= lesson.textarea %></p>
+                    <a href = "lesson/<%= lesson._id %>"><small>Go to lesson</small></a> 
+                </details>
             <% } %>
             
 
         </div>
         
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Students</h2> <button id="addStudent"><i style="font-size: 1.3em; margin-left: 10px;" class="fa fa-user-plus"></i></button>
+        <div class="section-header">
+            <h2>Students</h2> <button style="font-size:1.5em" id="addStudent" class="icon-button"><i class="fa fa-user-plus fa-fw"></i></button>
         </div>
         
         <!-- List of students of the class -->
@@ -101,11 +105,40 @@
             
 
                 <% for (student of students) { %>
-                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a>"</div> 
+                <div class = "student"><a href = "student/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a></div> 
                 <% } %>
 
         </div>
 
+        <div class="section-header">
+            <h2>Attendance at a glance</h2>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <% for(lesson of lessons) { %>
+                        <th><%= lesson.lessonName %> </th>
+                    <% } %> 
+                </tr>
+               
+            </thead>
+            
+            <% for(student of students) { %>
+                <tr>
+                    <th><%=student.firstName %> <%=student.lastName %></th>
+                    <% for(lesson of lessons) { %>
+                        <% if (lesson.attendance.includes(student._id)) { %>
+                            <td>✔️</td>
+                        <% } else { %>
+                            <td>❌</td>
+                        <% } %> 
+                    <% } %>
+                </tr>
+            <% } %>
+            
+        </table>
     </main>
     
     <script>
@@ -119,6 +152,7 @@
         
        
         const popupbg = document.querySelectorAll('.popupbg');
+        const cancelButtons = document.querySelectorAll('.cancel-button');
 
         addStudent.addEventListener("click", e => {
             addStudentForm.parentElement.style.display = "flex";
@@ -129,7 +163,13 @@
             console.log('hello')
         });
 
-
+        cancelButtons.forEach(button => {
+            button.addEventListener('click', e => {
+                console.log('wtf');
+                e.target.parentElement.parentElement.parentElement.style.display = 'none';
+            });
+        });
+        
         window.addEventListener('click', e=>{
             popupbg.forEach(popup => {
                 if(e.target == popup){

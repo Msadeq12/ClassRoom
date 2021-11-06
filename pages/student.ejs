@@ -28,14 +28,28 @@
             </address><br><br>
 
             <h2>Attendance</h2><br>
+
+            <div style="display:table">
+                <% for (lesson of attendanceArray) { %>
+                    <div style="display:table-row">
+                        <p style="display: table-cell;"><%= lesson.lessonName %></p>
+                        <% if (lesson.present) { %>
+                            ✔️
+                        <% } else { %>
+                            ❌
+                        <% } %>
+                         
+                    </div>
+                <% } %>
+            </div>
             
             <div id = "attendance">
                 <i><%= attendance %>%</i>
             </div>
             
-                    
+            <button type="submit" onclick="deleteStudentRecord()">Delete Student Record</button>  
+                  
         </div>
-        
 
         <div id = "image">  
             <img src = "data:<%= student.image.mimetype %>;base64, <%= student.image.data.toString('base64') %>  " width = "300" alt = "pic" style>
@@ -44,5 +58,15 @@
     </main>
 
     
+    
+    <script>
+        async function deleteStudentRecord(){
+            console.log('hi got here');
+            const res = await fetch(window.location.href, {
+                method:'DELETE',
+            });
+            location.reload();
+        }
+    </script>
 
 </body>

@@ -21,7 +21,6 @@ h1 {
 
 h2{
     font-weight: 400;
-    margin-bottom: 0;
     color: #242424;
 }
 
@@ -35,9 +34,11 @@ nav{
     display: flex;
     justify-content: space-between;
 }
+a{
+    text-decoration: none;
+}
 
-
-span a{
+nav a{
     color: white;
     text-decoration: none;
 }
@@ -87,6 +88,7 @@ main{
     height: 100%;             /* Full height */
     background-color: #00000048;
     justify-content: center;
+    align-items: center;
 }
 
 .popupbg form
@@ -111,7 +113,6 @@ input
     min-height: 40px;
 }
 button{
-    margin: 1em 0;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: white;
