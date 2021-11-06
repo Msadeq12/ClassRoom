@@ -89,13 +89,8 @@ const authenticate = (req, res, next) => {
         if(err || user === null){
             
             console.log(user);
-<<<<<<< HEAD
-            
-            res.render("intro");
-=======
             res.status(401);
             res.redirect("/login");
->>>>>>> 871dd112c8b8203fb482da66cede244cb32e111e
             
         }
         else
@@ -127,11 +122,7 @@ Website.get('/signup', (req, res) => {
 });
 
 Website.get('/login', (req, res) => {
-<<<<<<< HEAD
-    res.render("login");
-=======
     res.render('login');
->>>>>>> 871dd112c8b8203fb482da66cede244cb32e111e
 });
 
 // handles the class page
@@ -232,19 +223,12 @@ Website.get("/class/:classid/student/:studentid",authenticate, (req, res) => {
                     }else{
                         return {lessonName: lesson.lessonName,lessonDate: lesson.lessonDate, present: false};
                     }
-<<<<<<< HEAD
-                }
-            }
-     
-            attendancePercentage = (counter / lessonQuantity) * 100; 
-=======
                 
             });
 
             attendancePercentage = Math.round((counter / lessonQuantity) * 100); 
 
             
->>>>>>> 871dd112c8b8203fb482da66cede244cb32e111e
 
           /*   console.log(studentDoc);
             console.log("Student ID: " + studentid);

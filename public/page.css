@@ -1,11 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+:root{
+    --primary-h: 261;
+    --primary-s: 85%;
+    --primary-l: 53%;
+    --primary: hsl(var(--primary-h),var(--primary-s),var(--primary-l));
+    --primary-light: hsl(var(--primary-h),var(--primary-s),calc(var(--primary-l)*1.1));
+    --primary-dark: hsl(var(--primary-h),var(--primary-s),calc(var(--primary-l)*0.5));
+}
 
 *{
     box-sizing: border-box;
 }
-
+a{
+    color: var(--primary);
+}
 body{
     margin: 0;
     padding: 0;
@@ -30,7 +40,7 @@ p {
 nav{    
     font: 1.2rem;
     padding: 20px;
-    background-color:rgb(135, 71, 255);
+    background-color:var(--primary);
     display: flex;
     justify-content: space-between;
 }
@@ -117,14 +127,14 @@ button{
     font-weight: bold;
     color: white;
     padding: 0.7em 2em;
-    background-color: rgb(135, 71, 255);
+    background-color: var(--primary);
     border: none;
-    box-shadow: 0 0.3em 0 rgb(88, 45, 168);
+    box-shadow: 0 0.3em 0 var(--primary-dark);
     border-radius: 1em;
    
 }
 button:hover{
-    background-color: rgb(147, 89, 255);
+    background-color: var(--primary-light);
     transition: ease-in 100ms;
     cursor: pointer;
 }
