@@ -116,7 +116,9 @@ Website.get("/", authenticate, (req,res) => {
         
 
 });
-
+Website.get('/livestream', (req, res) => {
+    res.render('livestream');
+});
 Website.get('/signup', (req, res) => {
     res.render('signup');
 });
