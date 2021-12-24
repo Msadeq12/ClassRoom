@@ -2,7 +2,7 @@
 
 body
 {
-    color: rgb(135, 71, 255);
+    color: var(--primary);
     font-family: "Poppins", sans-serif;
 }
 
@@ -16,7 +16,7 @@ h1
 h2
 {
     font-weight: 400;
-    color: rgb(135, 71, 255);
+    color: var(--primary)
 }
 
 .student
@@ -53,7 +53,7 @@ form{
     display: flex;
     justify-content: space-between; 
     align-items: center;
-    border-bottom: 2px solid rgb(135, 71, 255);
+    border-bottom: 2px solid var(--primary);
 }
 .section-header>h2{
     margin: 10px 0;
@@ -61,11 +61,11 @@ form{
 .icon-button{
     padding: 0;
     background:none;
-    color: rgb(135, 71, 255);
+    color: var(--primary);
     box-shadow: none;
 }
 .icon-button:hover{
-    color: rgb(147, 89, 255);
+    color: var(--primary);
     background:none;
 }
 .icon-button:active{

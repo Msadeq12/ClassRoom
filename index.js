@@ -89,8 +89,6 @@ const authenticate = (req, res, next) => {
         if(err || user === null){
             
             console.log(user);
-            
-            
             res.status(401);
             res.redirect("/login");
             
@@ -118,13 +116,15 @@ Website.get("/", authenticate, (req,res) => {
         
 
 });
-
+Website.get('/livestream', (req, res) => {
+    res.render('livestream');
+});
 Website.get('/signup', (req, res) => {
     res.render('signup');
 });
 
 Website.get('/login', (req, res) => {
-    res.render("login");
+    res.render('login');
 });
 
 // handles the class page
