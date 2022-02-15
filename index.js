@@ -13,6 +13,9 @@ const Website = express();
 Website.use(bodyParser.urlencoded({extended: false}));
 Website.use(cookieParser());
 Website.use(express.static("public"));
+
+
+
 Website.use(fileUploader());
 var result = require("dotenv").config();
 
@@ -90,7 +93,7 @@ const authenticate = (req, res, next) => {
             
             console.log(user);
             res.status(401);
-            res.redirect("/login");
+            res.redirect("/intro");
             
         }
         else
@@ -119,6 +122,11 @@ Website.get("/", authenticate, (req,res) => {
 Website.get('/livestream', (req, res) => {
     res.render('livestream');
 });
+
+Website.get('/troll', (req, res) => {
+    res.render('troll');
+});
+
 Website.get('/signup', (req, res) => {
     res.render('signup');
 });
@@ -126,6 +134,10 @@ Website.get('/signup', (req, res) => {
 Website.get('/login', (req, res) => {
     res.render('login');
 });
+
+Website.get('/intro', (req, res) => {
+    res.render('intro');
+})
 
 // handles the class page
 Website.get('/class/:id/',authenticate, (req, res) => {
@@ -537,6 +549,7 @@ Website.post("/class/:classid/lesson/:lessonid",authenticate, (req, res) => {
    
 
 });
+
 Website.delete('/class/:classid/student/:studentid', authenticate, (req, res) => {
     
     Class.findOne({_id:req.params.classid, userid: req.user._id}).exec((err, classDoc)=>{
